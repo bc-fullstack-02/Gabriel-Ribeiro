@@ -7,7 +7,6 @@ const { post } = require('../routes/usersRoute');
 const createPost = async(req,res) => {
    
     try {
-    
         const newPost = await Post.create(req.body);
         res.status(200).json(newPost)
 
@@ -17,7 +16,7 @@ const createPost = async(req,res) => {
     }
 }
 
-// listar posts
+// listar posts -- timeline
 const listPost = async(req,res) =>{
     try {
         const list = await Post.find();
@@ -59,6 +58,30 @@ const deletePost = async (req,res) =>{
     }
 }
 
+//like e unlike no post
+const likePost = async (req,res) =>{
+    try {
+        const post = await Post.findById(req.params.id);
+        if(!post.likes.includes(req.body.userId)){
+            await post.updateOne({$push: {likes:req.body.userId}})
+            res.status(200).json("Você deu like no post!")
+        }else{
+            await post.updateOne({$pull: {likes:req.body.userId}});
+            res.status(200).json("Você retirou o like nesse post.")
+        }
 
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+}
 
-module.exports = {createPost, listPost, updatePost, deletePost} 
+const listOnePost = async (req,res) =>{
+    try {
+        const post = await Post.findById(req.params.id);
+        res.status(200).json(post)
+
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+}
+module.exports = {createPost, listPost, updatePost, deletePost, likePost, listOnePost} 
