@@ -1,0 +1,22 @@
+{
+  "name": "backend-rede-social",
+  "version": "1.0.0",
+  "description": "backend do projeto da redesocial da sysmap",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabriel ribeiro",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "helmet": "^6.0.0",
+    "mongoose": "^6.7.2",
+    "morgan": "^1.10.0",
+    "swagger-autogen": "^2.22.0",
+    "swagger-ui-express": "^4.6.0"
+  }
+}
