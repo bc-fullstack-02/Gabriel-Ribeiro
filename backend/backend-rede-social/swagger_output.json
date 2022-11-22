@@ -108,9 +108,11 @@
         }
       }
     },
-    "/": {
+
+    "/users/": {
       "get": {
-        "description": "",
+        "description": "Listar usuários",
+        "tags": ["User"],
         "parameters": [],
         "responses": {
           "200": {
@@ -122,7 +124,8 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Criar usuário",
+        "tags": ["User"],
         "parameters": [],
         "responses": {
           "200": {
@@ -136,7 +139,8 @@
     },
     "/{id}": {
       "put": {
-        "description": "",
+        "description": "Editar um usuário",
+        "tags": ["User"],
         "parameters": [
           {
             "name": "id",
@@ -171,6 +175,7 @@
       },
       "delete": {
         "description": "",
+        "tags": ["User"],
         "parameters": [
           {
             "name": "id",

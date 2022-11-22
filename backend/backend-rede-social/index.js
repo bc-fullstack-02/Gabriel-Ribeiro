@@ -10,6 +10,7 @@ const postRoute = require('./routes/postRoute');
 const authRoute = require('./routes/authRoute');
 const swaggerFile = require('./swagger_output.json')
 const swaggerUI = require('swagger-ui-express');
+const Auth = require('./middleware/auth')
 
 //swagger
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerFile))
@@ -24,8 +25,8 @@ app.use(helmet());
 app.use(morgan('common'));
 
 //rotas
-app.use('/auth',authRoute);
-app.use('/user',userRoute);
+app.use('/auth', authRoute);
+app.use('/users', Auth.private,userRoute);
 app.use('/posts', postRoute)
 
 app.get('/', (req,res) => {
