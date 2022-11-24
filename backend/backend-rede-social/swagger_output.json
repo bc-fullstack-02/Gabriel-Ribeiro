@@ -23,7 +23,7 @@
     "https"
   ],
   "securityDefinitions": {
-    "bearer": {
+    "JWT": {
       "type": "apiKey",
       "name": "Authorization",
       "in": "header",
@@ -39,7 +39,7 @@
   "paths": {
     "/auth/register": {
       "post": {
-        "description": "",
+        "description": "Criar usuário",
         "tags": ["Autenticação"],
         "parameters": [
           {
@@ -121,7 +121,11 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
       "post": {
         "description": "Criar usuário",

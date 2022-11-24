@@ -9,7 +9,7 @@ const listUsers =  async (req,res) => {
 
 const listUser = async (req,res) => {
     try {
-        const user = await User.find({username:req.params.username},'-password -isAdmin')
+        const user = await User.find({username:req.params.username},'-password')
 
         if (user.length > 0){
             res.status(200).json(user)
@@ -24,7 +24,7 @@ const listUser = async (req,res) => {
 
 const updateUser = async (req,res) => {
     const user = await User.findById(req.params.id);
-    if(req.body.id == req.params.id /* || req.user.isAdmin */){
+    if(req.body.id == req.params.id ){
         
         if(req.body.password){
             try {

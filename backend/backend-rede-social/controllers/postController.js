@@ -19,7 +19,7 @@ const createPost = async(req,res) => {
 // listar posts -- timeline
 const listPost = async(req,res) =>{
     try {
-        const list = await Post.find();
+        const list = await Post.find().populate({path:'comments', select:'description'});
         res.status(200).json(list)
     } catch (error) {
         res.status(500).json(error.message)

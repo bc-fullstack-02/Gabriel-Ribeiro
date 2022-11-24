@@ -23,10 +23,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default:""
     },
-    coverPicture:{
-        type:String,
-        default:""
-    },
     followers:{
         type: Array,
         default:[]
@@ -35,15 +31,7 @@ const UserSchema = new mongoose.Schema({
         type: Array,
         default:[]
     },
-    isAdmin:{
-        type: Boolean,
-        default:false
-    },
     description:{ //desc
-        type:String,
-        max:50
-    },
-    city:{
         type:String,
         max:50
     }

@@ -1,406 +1,774 @@
 {
-  "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
-    "title": "Rede social",
-    "description": "Documentação do sistema de rede social da Sysmap."
+    "description": "This is a sample server",
+    "title": "Swagger",
+    "version": "1.0.0"
   },
-  "host": "localhost:3000",
-  "basePath": "/",
-  "tags": [
-    {
-      "name": "Autenticação"
-    },
-    {
-      "name": "User"
-    },
-    {
-      "name": "Post"
-    }
-  ],
-  "schemes": [
-    "http",
-    "https"
-  ],
-  "securityDefinitions": {
-    "bearer": {
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header",
-      "description": "Insira o token JWT com o Bearer. Por exemplo: `Bearer: abcde12345 `."
-    }
-  },
-  "consumes": [
-    "application/json"
-  ],
+  "host": "localhost:4000",
+  "basePath": "/v1",
   "produces": [
     "application/json"
   ],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "JWT": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "Bearer <token>"
+    }
+  },
+  "swagger": "2.0",
   "paths": {
-    "/auth/register": {
-      "post": {
-        "description": "",
-        "tags": ["Autenticação"],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "username": {
-                  "example": "BruceWayne"
-                },
-                "password": {
-                  "example": "minhaSenh4"
-                },
-                "email": {
-                  "example": "BWayne@batmail.com"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "201": {
-            "description": "Created"
-          }
-        }
-      }
-    },
-    "/auth/login": {
-      "post": {
-        "description": "",
-        "tags": ["Autenticação"],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "example": "BWayne@batmail.com"
-                },
-                "password": {
-                  "example": "minhaSenh4"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/": {
+    "/posts/{postId}/comments": {
       "get": {
-        "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "user's id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "description": "This function get comments of a post",
+        "tags": [
+          "Comment"
+        ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "An array of posts",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Comment"
+              }
+            }
           },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": "Unexpected error"
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
       "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/{id}": {
-      "put": {
-        "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "postId",
             "in": "path",
+            "description": "user's id.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "comment",
             "in": "body",
+            "description": "the new point",
+            "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "userId": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/Comment"
             }
           }
         ],
+        "description": "This function post a Comment into a Post",
+        "tags": [
+          "Comment"
+        ],
+        "responses": {},
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/posts/{postId}/comments/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "user's id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user's id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "description": "This function to get a comment by id",
+        "tags": [
+          "Comment"
+        ],
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
+            "description": "post"
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "put": {
+        "parameters": [
+          {
+            "name": "comment",
+            "in": "body",
+            "description": "the new point",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          },
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "user's id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user's id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "description": "This function to put a comment by id",
+        "tags": [
+          "Comment"
+        ],
+        "responses": {},
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
       "delete": {
-        "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "postId",
             "in": "path",
+            "description": "user's id.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "userId": {
-                  "example": "any"
-                }
-              }
-            }
+            "name": "id",
+            "in": "path",
+            "description": "user's id.",
+            "required": true,
+            "type": "string"
           }
+        ],
+        "description": "This function to delete a comment by id",
+        "tags": [
+          "Comment"
+        ],
+        "responses": {},
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/posts/{postId}/comments/{id}/like": {
+      "post": {
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "user's id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user's id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "description": "\nThis function to get a post by id",
+        "tags": [
+          "Comment"
+        ],
+        "responses": {},
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/feed": {
+      "get": {
+        "parameters": [],
+        "description": "This function get posts",
+        "tags": [
+          "Feed"
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "An array of posts",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Post"
+              }
+            }
           },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": "Unexpected error"
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/posts": {
+      "get": {
+        "parameters": [],
+        "description": "This function get posts",
+        "tags": [
+          "Post"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of posts",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Post"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
+      "post": {
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "description": "the new point",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        ],
+        "description": "This function Post a Post",
+        "tags": [
+          "Post"
+        ],
+        "responses": {},
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/posts/{id}": {
       "get": {
-        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "user's id.",
             "required": true,
             "type": "string"
           }
         ],
+        "description": "This function to get a post by id",
+        "tags": [
+          "Post"
+        ],
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
+            "description": "post"
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "put": {
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "description": "the new point",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user's id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "description": "This function to get a post by id",
+        "tags": [
+          "Post"
+        ],
+        "responses": {},
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user's id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "description": "This function to get a post by id",
+        "tags": [
+          "Post"
+        ],
+        "responses": {},
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
-    "/{username}": {
+    "/posts/{id}/like": {
+      "post": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user's id.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "description": "\nThis function to get a post by id",
+        "tags": [
+          "Post"
+        ],
+        "responses": {},
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/profiles": {
       "get": {
-        "description": "",
+        "parameters": [],
+        "description": "This function list the profiles",
+        "tags": [
+          "Profile"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of user info"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/profiles/search?q={q}": {
+      "get": {
         "parameters": [
           {
-            "name": "username",
-            "in": "path",
+            "name": "q",
+            "in": "query",
+            "description": "profile id.",
             "required": true,
             "type": "string"
           }
         ],
+        "description": "\nThis function to get a post by id",
+        "tags": [
+          "Profile"
+        ],
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
+            "description": "profile"
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
-    "/{id}/follow": {
-      "put": {
-        "description": "",
+    "/profiles/{id}": {
+      "get": {
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "profile id.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "example": "any"
-                }
-              }
-            }
           }
+        ],
+        "description": "This function to get a post by id",
+        "tags": [
+          "Profile"
         ],
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
+            "description": "profile"
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
-    "/{id}/unfollow": {
-      "put": {
-        "description": "",
+    "/profiles/{id}/follow": {
+      "post": {
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "user's id.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
+        "description": "\nThis function to get a post by id",
+        "tags": [
+          "Profile"
+        ],
+        "responses": {},
+        "security": [
+          {
+            "JWT": []
           }
-        }
+        ]
       }
     },
-    "/{id}/like": {
-      "put": {
-        "description": "",
+    "/security/login": {
+      "post": {
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
+            "name": "post",
             "in": "body",
+            "description": "the new user",
+            "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "userId": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/Login"
             }
           }
         ],
+        "description": "\nThis function creates a user",
+        "tags": [
+          "Security"
+        ],
+        "responses": {}
+      }
+    },
+    "/security/register": {
+      "post": {
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "description": "the new user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Registry"
+            }
+          }
+        ],
+        "description": "\nThis function creates a user",
+        "tags": [
+          "Security"
+        ],
+        "responses": {}
+      }
+    },
+    "/users/me": {
+      "get": {
+        "parameters": [],
+        "description": "This function get my users",
+        "tags": [
+          "User"
+        ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "my user"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": "Unexpected error"
           }
-        }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "put": {
+        "parameters": [],
+        "description": "This function update my user",
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "my user"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "delete": {
+        "parameters": [],
+        "description": "This function update my user",
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "my user"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     }
   },
   "definitions": {
-    "User": {
-      "type": "object",
+    "Comment": {
+      "required": [
+        "description",
+        "profile",
+        "post"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": ""
+        },
+        "description": {
+          "type": "string",
+          "description": "the comment"
+        },
+        "profile": {
+          "type": "Profile",
+          "description": ""
+        },
+        "post": {
+          "type": "Post",
+          "description": ""
+        }
+      }
+    },
+    "Login": {
+      "required": [
+        "user",
+        "password"
+      ],
+      "properties": {
+        "user": {
+          "type": "string",
+          "description": ""
+        },
+        "password": {
+          "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "Registry": {
+      "required": [
+        "user",
+        "password"
+      ],
       "properties": {
         "name": {
           "type": "string",
-          "example": "John Doe"
+          "description": ""
         },
-        "age": {
-          "type": "number",
-          "example": 69
+        "user": {
+          "type": "string",
+          "description": ""
         },
-        "parents": {
-          "type": "object",
-          "properties": {
-            "father": {
-              "type": "string",
-              "example": "Aleister Doe"
-            },
-            "mother": {
-              "type": "string",
-              "example": "Crowley Doe"
-            }
-          }
+        "password": {
+          "type": "string",
+          "description": ""
         }
       }
     },
     "Post": {
-      "type": "object",
+      "required": [
+        "title",
+        "description",
+        "profile"
+      ],
       "properties": {
-        "userId": {
+        "_id": {
           "type": "string",
-          "example": "6377b80915940791ed630f14"
+          "description": ""
         },
-        "likes": {
-          "type": "array",
-          "example": [
-            "637bc43908ea42f21abdb91a"
-          ],
-          "items": {
-            "type": "string"
-          }
+        "title": {
+          "type": "string",
+          "description": "title"
         },
         "description": {
           "type": "string",
-          "example": "Esse é um post interessante"
+          "description": "description"
+        },
+        "profile": {
+          "type": "Profile",
+          "description": "profile"
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Comment"
+          }
         }
-      },
+      }
+    },
+    "Profile": {
       "required": [
-        "userId"
-      ]
+        "name",
+        "user"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": ""
+        },
+        "name": {
+          "type": "string",
+          "description": ""
+        },
+        "user": {
+          "type": "User",
+          "description": "user"
+        },
+        "following": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Profile"
+          }
+        }
+      }
+    },
+    "User": {
+      "required": [
+        "user",
+        "password"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": ""
+        },
+        "user": {
+          "type": "string",
+          "description": ""
+        },
+        "password": {
+          "type": "string",
+          "description": ""
+        },
+        "profile": {
+          "type": "Profile",
+          "description": "profile of user"
+        }
+      }
     }
-  }
+  },
+  "responses": {},
+  "parameters": {},
+  "tags": [
+    {
+      "name": "Comment",
+      "description": "api"
+    },
+    {
+      "name": "Feed",
+      "description": "api"
+    },
+    {
+      "name": "Post",
+      "description": "api"
+    },
+    {
+      "name": "Profile",
+      "description": "api"
+    },
+    {
+      "name": "Security",
+      "description": "api"
+    },
+    {
+      "name": "User",
+      "description": "api"
+    }
+  ]
 }
