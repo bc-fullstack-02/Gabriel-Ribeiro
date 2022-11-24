@@ -49,21 +49,23 @@ const updateUser = async (req,res) => {
     }
 }
 
-const deleteUser =  async (req,res) => {
-    const user = await User.find();
-    if(req.body.id == req.params.id){
-
-        try {
-            const user = await User.deleteOne({id:req.params.id})
-            res.status(200).json("Usuario deletado")
-        } catch (error) {
-            res.json(error.message)
-        }
-
-    }else{
-        return "Você só pode atualizar sua conta"
+const deleteUser = async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (req.body.id == req.params.id) {
+    try {
+      if (user) {
+        user.delete();
+        res.status(200).json("Usuario deletado");
+      } else {
+        res.json("Confira se o usuário está certo e tente novamente.");
+      }
+    } catch (error) {
+      res.json(error.message);
     }
-}
+  } else {
+    return res.status(500).json("Você só pode deletar a sua conta");
+  }
+};
 
 const followUser = async (req,res) => {
     if(req.body.id !== req.params.id){
