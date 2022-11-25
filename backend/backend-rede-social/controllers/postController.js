@@ -47,9 +47,9 @@ const deletePost = async (req,res) =>{
     try {
         const post = await Post.findById(req.params.id);
 
-        if(post.userId === req.body.userId){
+        if(post.userId == req.body.userId){
             await post.deleteOne();
-            res.status(200).json("Post deletar com sucesso");
+            res.status(200).json("Post deletado com sucesso");
         } else {
             res.status(403).json("você só pode deletar o seu próprio post");
         }

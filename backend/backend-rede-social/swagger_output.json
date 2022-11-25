@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0.0",
     "title": "Rede social",
-    "description": "Documentação do sistema de rede social da Sysmap."
+    "description": "Documentação SWAGGER do sistema de rede social da Sysmap."
   },
   "host": "localhost:3000",
   "basePath": "/",
@@ -390,13 +390,13 @@
       }
     },
 
-    "/posts/{postId}": {
+    "/posts/{id}": {
       "get": {
         "description": "Listar post por Id",
         "tags": ["Post"],
         "parameters": [
           {
-            "name": "username",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -416,7 +416,7 @@
         ]
       },
       "delete": {
-        "description": "Deletar um usuário",
+        "description": "Deletar um post",
         "tags": ["Post"],
         "parameters": [
           {
@@ -431,7 +431,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "id": {
+                "userId": {
                   "example": "637ff30dbde2daee898c6b6d"
                 }
               }
@@ -453,10 +453,7 @@
             "JWT": []
           }
         ]
-      }
-    },
-   
-    "/{id}": {
+      },
       "put": {
         "description": "Atualizar post",
         "tags": ["Post"],
@@ -500,9 +497,10 @@
         ]
       }
     },
-    "/{id}/like": {
+   
+    "/posts/{id}/like": {
       "put": {
-        "description": "",
+        "description": "Curtir ou descurtir um post",
         "tags": ["Post"],
         "parameters": [
           {
@@ -543,6 +541,12 @@
         "description": "Fazer um comentário em um post",
         "tags": ["Comentários"],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "body",
             "in": "body",
@@ -587,33 +591,46 @@
 
   "definitions": {
     "User": {
+      "required": [
+        "username",
+        "password",
+        "email"
+      ],
       "type": "object",
       "properties": {
-        "name": {
+        "username": {
           "type": "string",
           "example": "John Doe"
         },
-        "age": {
+        "email": {
           "type": "number",
           "example": 69
         },
-        "parents": {
-          "type": "object",
-          "properties": {
-            "father": {
-              "type": "string",
-              "example": "Aleister Doe"
-            },
-            "mother": {
-              "type": "string",
-              "example": "Crowley Doe"
-            }
-          }
+        "password": {
+          "type": "string",
+          "example": "minha senha Doe"
+        },
+        "avatar": {
+          "type": "string",
+          "example": "avatar.jpg"
+        },
+        "followers": {
+          "type": "array"
+        },
+        "following": {
+          "type": "array"
+        },
+        "description": {
+          "type": "string",
+          "example": "John Doe"
         }
+        
       }
     },
+
     "Post": {
       "type": "object",
+      
       "properties": {
         "userId": {
           "type": "string",
@@ -631,11 +648,46 @@
         "description": {
           "type": "string",
           "example": "Esse é um post interessante"
+        },
+        "image": {
+          "type": "string",
+          "example": "image.png"
+        },
+        "comments": {
+          "type": "object",
+          "example": [
+            "637bc43908ea42f21abdb91a"
+          ],
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
         "userId"
       ]
+    },
+
+    "Comment": {
+      "required": [
+        "_id",
+        "userId",
+        "postId"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": ""
+        },
+        "userId": {
+          "type": "string",
+          "description": ""
+        },
+        "postId": {
+          "type": "string",
+          "description": ""
+        }
+      }
     }
   }
 }
