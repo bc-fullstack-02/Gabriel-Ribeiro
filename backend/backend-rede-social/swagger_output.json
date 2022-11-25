@@ -71,6 +71,8 @@
         }
       }
     },
+
+
     "/auth/login": {
       "post": {
         "description": "",
@@ -109,6 +111,7 @@
       }
     },
 
+
     "/users/": {
       "get": {
         "description": "Listar usuários",
@@ -126,11 +129,20 @@
             "JWT": []
           }
         ]
-      },
-      "post": {
-        "description": "Criar usuário",
+      }
+    },
+    "/users/{username}": {
+      "get": {
+        "description": "Listar um usuário por username",
         "tags": ["User"],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -138,10 +150,14 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
-    "/{id}": {
+    "/users/{id}": {
       "put": {
         "description": "Editar um usuário",
         "tags": ["User"],
@@ -158,8 +174,11 @@
             "schema": {
               "type": "object",
               "properties": {
-                "userId": {
-                  "example": "any"
+                "id": {
+                  "example": "637ff30dbde2daee898c6b6d"
+                },
+                "email":{
+                  "example":"updatedEmail@mail.com"
                 }
               }
             }
@@ -175,10 +194,14 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
       },
       "delete": {
-        "description": "",
+        "description": "Deletar um usuário",
         "tags": ["User"],
         "parameters": [
           {
@@ -193,8 +216,8 @@
             "schema": {
               "type": "object",
               "properties": {
-                "userId": {
-                  "example": "any"
+                "id": {
+                  "example": "637ff30dbde2daee898c6b6d"
                 }
               }
             }
@@ -210,18 +233,104 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
-      },
-      "get": {
-        "description": "",
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    
+    "/users/{id}/follow": {
+      "put": {
+        "description": "Seguir um usuário",
+        "tags": ["User"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Usuário que irá ganhar o follow"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "637694690e45030509a60028"
+                }
+              }
+            }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/users/{id}/unfollow": {
+      "put": {
+        "description": "Deixar de seguir um usuário",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Usuário que deixará de ser seguido"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "637694690e45030509a60028"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+
+    "/posts/": {
+      "get": {
+        "description": "Listar posts",
+        "tags": ["Post"],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
@@ -229,12 +338,62 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      
+        "post": {
+          "description": "Criar um novo post",
+          "tags": ["Post"],
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "example": "asdasdj102912j0djasidjasodjafj0j11f"
+                  },
+                  "description": {
+                    "example": "minha descrição"
+                  },
+                  "image": {
+                    "example": "image.png"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+            "404": {
+              "description": "Not Found"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }, "security": [
+            {
+              "JWT": []
+            }
+          ]
+        
       }
     },
-    "/{username}": {
+
+    "/posts/{postId}": {
       "get": {
-        "description": "",
+        "description": "Listar post por Id",
+        "tags": ["Post"],
         "parameters": [
           {
             "name": "username",
@@ -250,12 +409,15 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
-      }
-    },
-    "/{id}/follow": {
-      "put": {
-        "description": "",
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "Deletar um usuário",
+        "tags": ["Post"],
         "parameters": [
           {
             "name": "id",
@@ -270,7 +432,7 @@
               "type": "object",
               "properties": {
                 "id": {
-                  "example": "any"
+                  "example": "637ff30dbde2daee898c6b6d"
                 }
               }
             }
@@ -286,12 +448,18 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
-    "/{id}/unfollow": {
+   
+    "/{id}": {
       "put": {
-        "description": "",
+        "description": "Atualizar post",
+        "tags": ["Post"],
         "parameters": [
           {
             "name": "id",
@@ -305,8 +473,14 @@
             "schema": {
               "type": "object",
               "properties": {
-                "id": {
-                  "example": "any"
+                "userId": {
+                  "example": "637ff823173eb3ee85b5d09c"
+                },
+                "image": {
+                  "example": "fotoatualizada.jpg"
+                },
+                "description": {
+                  "example": "Descrição atualizada"
                 }
               }
             }
@@ -316,18 +490,20 @@
           "200": {
             "description": "OK"
           },
-          "403": {
-            "description": "Forbidden"
-          },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     },
     "/{id}/like": {
       "put": {
         "description": "",
+        "tags": ["Post"],
         "parameters": [
           {
             "name": "id",
@@ -355,10 +531,60 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/posts/{id}/comment": {
+      "post": {
+        "description": "Fazer um comentário em um post",
+        "tags": ["Comentários"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "example": "lorem ipsum comentando aqui"
+                },
+                "userId": {
+                  "example": "6380096617cd183c85b6bcdd"
+                },
+                "postId": {
+                  "example": "637ff868173eb3ee85b5d0a3"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
       }
     }
   },
+
+
   "definitions": {
     "User": {
       "type": "object",
