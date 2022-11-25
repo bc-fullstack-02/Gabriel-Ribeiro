@@ -26,8 +26,8 @@ app.use(morgan('common'));
 
 //rotas
 app.use('/auth', authRoute);
-app.use('/users', Auth.private,userRoute);
-app.use('/posts', postRoute)
+app.use('/users', Auth.private, userRoute);
+app.use('/posts', Auth.private, postRoute)
 
 app.get('/', (req,res) => {
     res.send("HOME PAGE")
