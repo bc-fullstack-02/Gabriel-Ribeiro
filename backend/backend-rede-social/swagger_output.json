@@ -158,7 +158,7 @@
             "type": "string"
           }
         ],
-        "description": "This function to put a comment by id",
+        "description": "Editar um comentário.",
         "tags": [
           "Comment"
         ],
@@ -204,19 +204,31 @@
           {
             "name": "postId",
             "in": "path",
-            "description": "user's id.",
+            "description": "",
             "required": true,
             "type": "string"
           },
           {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "any"
+                }
+              }
+            }
+          },
+          {
             "name": "id",
             "in": "path",
-            "description": "user's id.",
+            "description": "",
             "required": true,
             "type": "string"
           }
         ],
-        "description": "\nThis function to get a post by id",
+        "description": "Dar like em um comentário",
         "tags": [
           "Comment"
         ],
@@ -259,7 +271,7 @@
     "/posts": {
       "get": {
         "parameters": [],
-        "description": "This function get posts",
+        "description": "Listar todos os posts.",
         "tags": [
           "Post"
         ],

@@ -84,4 +84,20 @@ const deleteComment = async (req, res) => {
   }
 };
 
-module.exports = { createComment, listComments, listOneComment, updateComment, deleteComment};
+const likeComment = async (req,res) =>{
+  try {
+      const comment = await Comment.findById(req.params.id);
+      if(!comment.likes.includes(req.body.userId)){
+          await comment.updateOne({$push: {likes:req.body.userId}})
+          res.status(200).json("Você deu like no comentário!")
+      }else{
+          await comment.updateOne({$pull: {likes:req.body.userId}});
+          res.status(200).json("Você retirou o like nesse comentário.")
+      }
+
+  } catch (error) {
+      res.status(500).json(error.message)
+  }
+}
+
+module.exports = { createComment, listComments, listOneComment, updateComment, deleteComment, likeComment};

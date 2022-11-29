@@ -77,7 +77,7 @@ const likePost = async (req,res) =>{
 
 const listOnePost = async (req,res) =>{
     try {
-        const post = await Post.findById(req.params.id);
+        const post = await Post.findById(req.params.id).populate({path:'comments',select:'description'});
         res.status(200).json(post)
 
     } catch (error) {
