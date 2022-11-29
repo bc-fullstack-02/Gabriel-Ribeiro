@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const dotenv = require('dotenv').config();
 const userRoute = require('./routes/usersRoute');
 const postRoute = require('./routes/postRoute');
+const commentRoute = require('./routes/commentRoute');
 const authRoute = require('./routes/authRoute');
 const swaggerFile = require('./swagger_output.json')
 const swaggerUI = require('swagger-ui-express');
@@ -27,7 +28,7 @@ app.use(morgan('common'));
 //rotas
 app.use('/auth', authRoute);
 app.use('/users', Auth.private, userRoute);
-app.use('/posts', Auth.private, postRoute)
+app.use('/posts', Auth.private, postRoute, commentRoute)
 
 app.get('/', (req,res) => {
     res.send("HOME PAGE")

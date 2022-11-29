@@ -1,0 +1,693 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Rede social",
+    "description": "Documentação SWAGGER do sistema de rede social da Sysmap."
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Autenticação"
+    },
+    {
+      "name": "User"
+    },
+    {
+      "name": "Post"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "JWT": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Insira o token JWT com o Bearer. Por exemplo: `Bearer: abcde12345 `."
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "description": "Criar usuário",
+        "tags": ["Autenticação"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "example": "BruceWayne"
+                },
+                "password": {
+                  "example": "minhaSenh4"
+                },
+                "email": {
+                  "example": "BWayne@batmail.com"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+
+
+    "/auth/login": {
+      "post": {
+        "description": "",
+        "tags": ["Autenticação"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "BWayne@batmail.com"
+                },
+                "password": {
+                  "example": "minhaSenh4"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+
+
+    "/users/": {
+      "get": {
+        "description": "Listar usuários",
+        "tags": ["User"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/users/{username}": {
+      "get": {
+        "description": "Listar um usuário por username",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/users/{id}": {
+      "put": {
+        "description": "Editar um usuário",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "637ff30dbde2daee898c6b6d"
+                },
+                "email":{
+                  "example":"updatedEmail@mail.com"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "Deletar um usuário",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "637ff30dbde2daee898c6b6d"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    
+    "/users/{id}/follow": {
+      "put": {
+        "description": "Seguir um usuário",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Usuário que irá ganhar o follow"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "637694690e45030509a60028"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/users/{id}/unfollow": {
+      "put": {
+        "description": "Deixar de seguir um usuário",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Usuário que deixará de ser seguido"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "637694690e45030509a60028"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+
+    "/posts/": {
+      "get": {
+        "description": "Listar posts",
+        "tags": ["Post"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      
+        "post": {
+          "description": "Criar um novo post",
+          "tags": ["Post"],
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "example": "asdasdj102912j0djasidjasodjafj0j11f"
+                  },
+                  "description": {
+                    "example": "minha descrição"
+                  },
+                  "image": {
+                    "example": "image.png"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+            "404": {
+              "description": "Not Found"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }, "security": [
+            {
+              "JWT": []
+            }
+          ]
+        
+      }
+    },
+
+    "/posts/{id}": {
+      "get": {
+        "description": "Listar post por Id",
+        "tags": ["Post"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "Deletar um post",
+        "tags": ["Post"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "637ff30dbde2daee898c6b6d"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      },
+      "put": {
+        "description": "Atualizar post",
+        "tags": ["Post"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "637ff823173eb3ee85b5d09c"
+                },
+                "image": {
+                  "example": "fotoatualizada.jpg"
+                },
+                "description": {
+                  "example": "Descrição atualizada"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+   
+    "/posts/{id}/like": {
+      "put": {
+        "description": "Curtir ou descurtir um post",
+        "tags": ["Post"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/posts/{id}/comment": {
+      "post": {
+        "description": "Fazer um comentário em um post",
+        "tags": ["Comentários"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "example": "lorem ipsum comentando aqui"
+                },
+                "userId": {
+                  "example": "6380096617cd183c85b6bcdd"
+                },
+                "postId": {
+                  "example": "637ff868173eb3ee85b5d0a3"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }, "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    }
+  },
+
+
+  "definitions": {
+    "User": {
+      "required": [
+        "username",
+        "password",
+        "email"
+      ],
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "John Doe"
+        },
+        "email": {
+          "type": "number",
+          "example": 69
+        },
+        "password": {
+          "type": "string",
+          "example": "minha senha Doe"
+        },
+        "avatar": {
+          "type": "string",
+          "example": "avatar.jpg"
+        },
+        "followers": {
+          "type": "array"
+        },
+        "following": {
+          "type": "array"
+        },
+        "description": {
+          "type": "string",
+          "example": "John Doe"
+        }
+        
+      }
+    },
+
+    "Post": {
+      "type": "object",
+      
+      "properties": {
+        "userId": {
+          "type": "string",
+          "example": "6377b80915940791ed630f14"
+        },
+        "likes": {
+          "type": "array",
+          "example": [
+            "637bc43908ea42f21abdb91a"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string",
+          "example": "Esse é um post interessante"
+        },
+        "image": {
+          "type": "string",
+          "example": "image.png"
+        },
+        "comments": {
+          "type": "object",
+          "example": [
+            "637bc43908ea42f21abdb91a"
+          ],
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "userId"
+      ]
+    },
+
+    "Comment": {
+      "required": [
+        "_id",
+        "userId",
+        "postId"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": ""
+        },
+        "userId": {
+          "type": "string",
+          "description": ""
+        },
+        "postId": {
+          "type": "string",
+          "description": ""
+        }
+      }
+    }
+  }
+}
