@@ -9,8 +9,9 @@
 * Express.js
 * Node.js
 * DotEnv
-* MongoDB
-* Mongoose ODM
+* Helmet
+* Bcrypt
+* MongoDB com a ODM Mongoose
 * Swagger API
 * JWT (JSON Web Token) Authentication
 * Docker
