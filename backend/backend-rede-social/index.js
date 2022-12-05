@@ -12,9 +12,12 @@ const authRoute = require('./routes/authRoute');
 const swaggerFile = require('./swagger_output.json')
 const swaggerUI = require('swagger-ui-express');
 const Auth = require('./middleware/auth')
-
+const Minio = require('./middleware/minio')
+const upload = require('./middleware/uploadFile')
 //swagger
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerFile))
+//Criando um bucket no Minio 
+Minio.createBucket();
 
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser:true, useUnifiedTopology:true}, ()=>{
     console.log("MongoDB conectado");
@@ -35,6 +38,19 @@ app.get('/', (req,res) => {
 })
 
 
+//upar imagem para o minio
+app.post("/uploadfile", upload.single('upfile'), (req, res) => {
+ 
+    console.log(req.file);
+    
+      Minio.minioClient.fPutObject(Minio.bucketName, req.file.filename, req.file.path, function(error, etag) {
+        if(error) {
+            return console.log(error);
+        }
+        res.send(req.file);
+    });
+    
+  });
 
 
 
@@ -48,5 +64,5 @@ app.get('/', (req,res) => {
 
 
 app.listen(port, () => {
-    console.log(`Servidor ON na porta : https://localhost:${port}`);
+    console.log(`[Servidor ON na porta : https://localhost:${port} ] \n -----------------`);
 })
