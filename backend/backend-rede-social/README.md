@@ -28,12 +28,17 @@
  ### ```npm  install ```
  ### Rode o projeto com o script : ``` npm start```
  ### Criar um arquivo na pasta raiz do projeto chamado ".env" e inserir as seguintes propriedades no arquivo:
+ <br>
+
  ```
- MONGO_URI = {sua uri}
- ```
- ```
- JWT_SECRET_KEY = {sua secret key}
- ```
+  MONGO_URI = {sua uri}
+  JWT_SECRET_KEY = {sua secret key}
+  MINIO_ENDPOINT= {endpoint do minio}
+  MINIO_ACCESS_KEY= {seu username do minio}
+  MINIO_SECRET_KEY= {sua senha do minio}
+  MINIO_BUCKET_NAME = {nome do seu bucket}
+```
+ 
  
  ## 🐋Docker
 Caso você queira rodar a aplicação diretamente do docker insira o código abaixo:
