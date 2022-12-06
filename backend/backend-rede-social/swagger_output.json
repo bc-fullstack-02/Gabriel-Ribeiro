@@ -423,7 +423,7 @@
     "/profiles": {
       "get": {
         "parameters": [],
-        "description": "This function list the profiles",
+        "description": "Lista os perfis disponíveis",
         "tags": [
           "Profile"
         ],
@@ -469,18 +469,18 @@
         ]
       }
     },
-    "/profiles/{id}": {
+    "/profiles/{username}": {
       "get": {
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "profile id.",
+            "description": "username do usuário.",
             "required": true,
             "type": "string"
           }
         ],
-        "description": "This function to get a post by id",
+        "description": "Listar um usuário por username",
         "tags": [
           "Profile"
         ],
@@ -502,12 +502,24 @@
           {
             "name": "id",
             "in": "path",
-            "description": "user's id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Usuário que irá ganhar o follow"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "637694690e45030509a60028"
+                }
+              }
+            }
           }
         ],
-        "description": "\nThis function to get a post by id",
+        "description": "\nSeguir um usuário",
         "tags": [
           "Profile"
         ],

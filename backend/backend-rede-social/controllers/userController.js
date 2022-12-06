@@ -80,30 +80,9 @@ const followUser = async (req,res) => {
 
                 res.status(200).json("Usuário seguido com sucesso")
             }else{
-                res.status(403).json("Você já segue essa pessoa")
-            }
-        } catch (error) {
-            res.status(500).json(error.message)
-        }
-    }else{
-        res.status(403).json("Você não pode seguir a si mesmo")
-    }
-}
-
-const unfollowUser = async (req,res) => {
-    if(req.body.id !== req.params.id){
-
-        try {
-            const user = await User.findById(req.params.id)
-            const currentUser = await User.findById(req.body.id)
-
-            if(user.followers.includes(req.body.id)){
-                await user.updateOne({$pull:{followers:req.body.id}})
+                await followedUser.updateOne({$pull:{followers:req.body.id}})
                 await currentUser.updateOne({$pull:{following:req.params.id}})
-
-                res.status(200).json("Você deixou de seguir esse usuário")
-            }else{
-                res.status(403).json("Você não segue essa pessoa")
+                res.status(403).json("Você deixou de seguir essa pessoa.")
             }
         } catch (error) {
             res.status(500).json(error.message)
@@ -112,4 +91,5 @@ const unfollowUser = async (req,res) => {
         res.status(403).json("Você não pode seguir a si mesmo")
     }
 }
-module.exports = {listUsers, listUser, updateUser, deleteUser, followUser, unfollowUser}
+
+module.exports = {listUsers, listUser, updateUser, deleteUser, followUser}
