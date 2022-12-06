@@ -26,8 +26,8 @@ const register = async (req,res) => {
 const login = async (req,res) => {
     
     try {
-        const mail  = req.body.email
-        const user = await User.findOne({email:mail});
+        const loginUser  = req.body.username
+        const user = await User.findOne({username:loginUser});
 
         !user && res.status(404).json("Usuario não encontrado");
         const validPass = await bcrypt.compare(req.body.password, user.password);

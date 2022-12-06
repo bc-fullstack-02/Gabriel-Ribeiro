@@ -525,14 +525,21 @@
           {
             "name": "post",
             "in": "body",
-            "description": "the new user",
+            "description": "",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Login"
+              "properties": {
+                "username": {
+                  "example": "BruceWayne"
+                },
+                "password": {
+                  "example": "batSenha"
+                }
+              }
             }
           }
         ],
-        "description": "\nThis function creates a user",
+        "description": "\nFazer o login",
         "tags": [
           "Security"
         ],
@@ -545,14 +552,24 @@
           {
             "name": "post",
             "in": "body",
-            "description": "the new user",
+            "description": "",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Registry"
+              "properties": {
+                "username": {
+                  "example": "BruceWayne"
+                },
+                "password": {
+                  "example": "batSenha"
+                },
+                "email": {
+                  "example": "BWayne@batmail.com"
+                }
+              }
             }
           }
         ],
-        "description": "\nThis function creates a user",
+        "description": "\nRegistrar um novo usuário",
         "tags": [
           "Security"
         ],

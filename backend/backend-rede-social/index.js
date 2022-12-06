@@ -29,7 +29,7 @@ app.use(helmet());
 app.use(morgan('common'));
 
 //rotas
-app.use('/auth', authRoute);
+app.use('/security', authRoute);
 app.use('/users', Auth.private, userRoute);
 app.use('/posts', Auth.private, postRoute, commentRoute)
 
