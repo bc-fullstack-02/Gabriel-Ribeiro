@@ -25,7 +25,7 @@ function TextInputInput (props : TextInputInputProps){
 }
 
 function TextInputIcon(props : TextInputIconProps){
-    return <h2 className="w-6 h-6 text-gray-400">{props.children}</h2>
+    return <Slot className="w-6 h-6 text-gray-400">{props.children}</Slot>
 }
 
 export const TextInput = {
