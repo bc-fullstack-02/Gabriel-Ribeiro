@@ -44,7 +44,7 @@ app.use('/feed', Auth.private, feedRoute);
 }) */
 
 
-//upar imagem para o minio
+//upar imagem para o minio --Testes--
 app.post("/uploadfile", upload.single('upfile'), (req, res) => {
  
     console.log(req.file);

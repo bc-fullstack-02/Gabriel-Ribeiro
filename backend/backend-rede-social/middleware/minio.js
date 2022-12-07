@@ -5,6 +5,8 @@ const minioClient = new Minio.Client({
   accessKey: process.env.MINIO_ACCESS_KEY,
   secretKey: process.env.MINIO_SECRET_KEY,
   endPoint: process.env.MINIO_ENDPOINT,
+  useSSL: false,
+  port: 1 * process.env.MINIO_PORT,
   pathStyle: true,
 });
   
