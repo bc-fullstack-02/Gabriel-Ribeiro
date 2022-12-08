@@ -28,8 +28,10 @@ const createPost =  async(req, res) => {
             const imageName = req.file.filename;
             const newPost = await Post.create(req.body);
             const newPostId = newPost._id;
-            const post = await Post.findById(newPostId).updateOne({image:imageName});
+            const publicUrl = Minio.minioClient.protocol + '//' + Minio.minioClient.host + ':' + Minio.minioClient.port + '/' + Minio.bucketName + '/' + imageName
+            const post = await Post.findById(newPostId).updateOne({image:publicUrl});
             
+            console.log(publicUrl);
             res.status(200).json(await Post.findById(newPostId))
         });
 
