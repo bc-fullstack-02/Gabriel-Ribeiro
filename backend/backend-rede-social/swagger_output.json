@@ -296,22 +296,49 @@
         ]
       },
       "post": {
+        "consumes":["multipart/form-data"],
         "parameters": [
           {
-            "name": "post",
+            "name": "body",
             "in": "body",
-            "description": "the new point",
-            "required": true,
             "schema": {
-              "$ref": "#/definitions/Post"
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "asdasdj102912j0djasidjasodjafj0j11f"
+                },
+                "description": {
+                  "example": "minha descrição"
+                }                
+              }
             }
+          },
+          {
+            "name": "image",
+            "in": "formData",
+            "type":"file"
+          
+          
           }
         ],
-        "description": "This function Post a Post",
+        "description": "Criar um novo post",
         "tags": [
           "Post"
         ],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
         "security": [
           {
             "JWT": []
@@ -325,12 +352,12 @@
           {
             "name": "id",
             "in": "path",
-            "description": "user's id.",
+            "description": "",
             "required": true,
             "type": "string"
           }
         ],
-        "description": "This function to get a post by id",
+        "description": "Listar posts por ID.",
         "tags": [
           "Post"
         ],
@@ -348,23 +375,31 @@
       "put": {
         "parameters": [
           {
-            "name": "post",
-            "in": "body",
-            "description": "the new point",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Post"
-            }
-          },
-          {
             "name": "id",
             "in": "path",
-            "description": "user's id.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "637ff823173eb3ee85b5d09c"
+                },
+                "image": {
+                  "example": "fotoatualizada.jpg"
+                },
+                "description": {
+                  "example": "Descrição atualizada"
+                }
+              }
+            }
           }
         ],
-        "description": "This function to get a post by id",
+        "description": "Atualizar post.",
         "tags": [
           "Post"
         ],
@@ -380,12 +415,23 @@
           {
             "name": "id",
             "in": "path",
-            "description": "user's id.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "637ff30dbde2daee898c6b6d"
+                }
+              }
+            }
           }
         ],
-        "description": "This function to get a post by id",
+        "description": "Deletar um post.",
         "tags": [
           "Post"
         ],
@@ -403,12 +449,23 @@
           {
             "name": "id",
             "in": "path",
-            "description": "user's id.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
-        "description": "\nThis function to get a post by id",
+        "description": "\nCurtir ou descurtir um post",
         "tags": [
           "Post"
         ],

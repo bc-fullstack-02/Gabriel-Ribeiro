@@ -6,7 +6,7 @@ var storage = multer.diskStorage({
     cb(null, 'public/assets/uploads/')
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
+    cb(null, "Post_"+ Date.now() + path.extname(file.originalname)) //Appending extension
   }
 })
 

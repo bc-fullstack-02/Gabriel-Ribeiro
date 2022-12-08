@@ -1,9 +1,11 @@
 const router = require('express').Router();
 const Post = require('../models/Post');
 const { post } = require('../routes/usersRoute');
+const Minio = require('../middleware/minio')
+//const upload = require('../middleware/uploadFile')
 
 
-// criar um post
+/* // criar um post
 const createPost = async(req,res) => {
    
     try {
@@ -15,6 +17,27 @@ const createPost = async(req,res) => {
         res.status(500).json(error.message)
     }
 }
+ */
+
+const createPost =  async(req, res) => {
+    try {
+        Minio.minioClient.fPutObject(Minio.bucketName, req.file.filename, req.file.path, async (error, etag)=> {
+            if(error) {
+                return console.log(error);
+            }
+            const imageName = req.file.filename;
+            const newPost = await Post.create(req.body);
+            const newPostId = newPost._id;
+            const post = await Post.findById(newPostId).updateOne({image:imageName});
+            
+            res.status(200).json(await Post.findById(newPostId))
+        });
+
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json(error.message);
+    }
+  };
 
 // listar posts -- timeline
 const listPost = async(req,res) =>{
