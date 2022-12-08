@@ -29,13 +29,19 @@ const login = async (req,res) => {
         const loginUser  = req.body.username
         const user = await User.findOne({username:loginUser});
 
-        !user && res.status(404).json("Usuario não encontrado");
+        if(!user){
+           return res.status(404).json("Usuario não encontrado");
+        }
         const validPass = await bcrypt.compare(req.body.password, user.password);
-        !validPass && res.status(400).send("Senha inválida");
+       
+        if(!validPass){
+            return res.status(400).send("Senha inválida");
+        }
+
         const token = JWT.sign(
-            {username:req.body.username, password:req.body.password},
-            process.env.JWT_SECRET_KEY ,
-            {expiresIn:'2h'}
+          { username: req.body.username, password: req.body.password },
+          process.env.JWT_SECRET_KEY,
+          { expiresIn: "2h" }
         );
         res.status(200).send( {"Seu token: ":token})
     } catch (error) {
