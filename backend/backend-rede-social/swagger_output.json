@@ -296,27 +296,28 @@
         ]
       },
       "post": {
-        "consumes":["multipart/form-data"],
+        
         "parameters": [
+       
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "userId": {
-                  "example": "asdasdj102912j0djasidjasodjafj0j11f"
-                },
-                "description": {
-                  "example": "minha descrição"
-                }                
-              }
-            }
+            "name": "userId",
+            "in": "formData",
+            "type":"string",
+            "required": true
+          
+          },
+          {
+            "name": "description",
+            "in": "formData",
+            "type":"string"
+          
+          
           },
           {
             "name": "image",
             "in": "formData",
-            "type":"file"
+            "type":"file",
+            "required": true
           
           
           }
