@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/User');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const JWT = require('jsonwebtoken')
 
 const register = async (req,res) => {
@@ -43,7 +43,7 @@ const login = async (req,res) => {
           process.env.JWT_SECRET_KEY,
           { expiresIn: "2h" }
         );
-        res.status(200).send( {"Seu token: ":token})
+        res.status(200).send({token})
     } catch (error) {
         res.status(500).send(error.message)
     }
