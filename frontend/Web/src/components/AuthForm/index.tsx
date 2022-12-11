@@ -10,18 +10,39 @@ import { FormEvent } from 'react';
 interface AuthFormProps {
     formTitle: string;
     submitFormButtonText: string;
-    submitFormButtonAction : (user: string, password: string) => void ;
+    submitFormButtonAction: (auth: Auth) => void;
     linkDescription: string;
     routeName: string
 }
 
+interface AuthFormElements extends HTMLFormControlsCollection{
+    user: HTMLInputElement;
+    password: HTMLInputElement;
+    email?: HTMLInputElement;
+}
+
+interface AuthFormElement extends HTMLFormElement{
+    readonly elements: AuthFormElements
+}
+
+export interface Auth {
+    username: string;
+    email?: string;
+    password: string;
+  }
+
 function AuthForm ({formTitle, submitFormButtonText, submitFormButtonAction, linkDescription, routeName }: AuthFormProps){
 
-    function handleSubmit(event: FormEvent){
+    function handleSubmit(event: FormEvent<AuthFormElement>){
         event.preventDefault();
-        const form = event.target as HTMLFormElement;
-
-        submitFormButtonAction(form.elements.user.value, form.elements.password.value)
+        const form = event.currentTarget; 
+        const auth = {
+            username: form.elements.user.value,
+            email: form.elements.email?.value,
+            password: form.elements.password.value,
+          };
+            console.log(auth)
+        submitFormButtonAction(auth);
     }
 
     return(
@@ -32,7 +53,7 @@ function AuthForm ({formTitle, submitFormButtonText, submitFormButtonAction, lin
                 <Text className="mt-1 opacity-50">{formTitle}</Text>
             </header>
             
-            <form onSubmit={(e)=> handleSubmit(e)} className="mt-10 flex flex-col gap-4 items-stretch w-full max-w-sm">
+            <form onSubmit={handleSubmit} className="mt-10 flex flex-col gap-4 items-stretch w-full max-w-sm">
                 <label htmlFor="user" className="flex flex-col gap-2">
                     <Text>Login</Text>
                     <TextInput.Root>
