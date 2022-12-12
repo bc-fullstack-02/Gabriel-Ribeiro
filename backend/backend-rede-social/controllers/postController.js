@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const Post = require('../models/Post');
 const { post } = require('../routes/usersRoute');
-const Minio = require('../middleware/minio')
+const Minio = require('../middleware/minio');
+const User = require('../models/User');
 //const upload = require('../middleware/uploadFile')
 
 
@@ -29,9 +30,15 @@ const createPost =  async(req, res) => {
             const newPost = await Post.create(req.body);
             const newPostId = newPost._id;
             const publicUrl = Minio.minioClient.protocol + '//' + Minio.minioClient.host + ':' + Minio.minioClient.port + '/' + Minio.bucketName + '/' + imageName
+            
             const post = await Post.findById(newPostId).updateOne({image:publicUrl});
             
-            console.log(publicUrl);
+            //atualizando campo profile
+            const profile = await User.findById(req.body.userId)
+            const profileName = profile.username;
+            const postProfile = await Post.findById(newPostId).updateOne({profile:profileName});
+            
+            
             res.status(200).json(await Post.findById(newPostId))
         });
 

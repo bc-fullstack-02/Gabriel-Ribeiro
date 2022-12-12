@@ -5,7 +5,11 @@ const Comment = require('./Comment');
 const PostSchema = new mongoose.Schema({
     userId:{
         type: String,
-        require:true,
+        required:true,
+    },
+    profile:{
+        type:String,
+        default: ""
     },
     likes:{
         type: Array,
