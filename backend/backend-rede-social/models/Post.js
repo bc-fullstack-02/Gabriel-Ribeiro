@@ -22,6 +22,10 @@ const PostSchema = new mongoose.Schema({
         type:String,
         max:500
     },
+    title:{ 
+        type:String,
+        max:100
+    },
     comments: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Comment"

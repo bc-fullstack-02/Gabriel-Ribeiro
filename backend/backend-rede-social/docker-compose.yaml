@@ -43,13 +43,6 @@ services:
     image: minio/mc
     depends_on: 
     - minio
-    entrypoint: >
-        /bin/sh -c "
-        /usr/bin/mc config host add --quiet --api s3v4 local http://minio:9000 minioadmin minioadmin;
-        /usr/bin/mc rb --force local/sysmap;
-        /usr/bin/mc mb --quiet local/sysmap;
-        /usr/bin/mc anonymous --insecure policy download local/sysmap;
-        /usr/bin/mc admin policy set download local/sysmap;
-        "
+   
    
 
