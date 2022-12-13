@@ -1,0 +1,55 @@
+# Use root/example as user/password credentials
+version: '3.8'
+name: Sysmap-Parrot
+
+services:
+
+  backend: 
+    #image: gahbr/parrot
+    build:
+      context: ./
+    command: npm start
+    ports: 
+      - '3000:3000'
+    volumes: 
+      - .:/usr/app
+    depends_on:
+      - mongodb
+      - minio
+    environment:
+      JWT_SECRET_KEY : sysmap
+      MONGO_URI: mongodb://mongodb:27017/parrotdb
+      MINIO_ENDPOINT : 192.168.1.7
+      MINIO_PORT : 9000
+      MINIO_ACCESS_KEY : minioadmin
+      MINIO_SECRET_KEY : minioadmin
+      MINIO_BUCKET_NAME : sysmap
+      
+  mongodb:
+    container_name: mongo
+    image: mongo
+    ports:
+      - 27017:27017
+   
+  minio:
+    image: minio/minio
+    container_name: minio
+    command: server /data --console-address ":9090"
+    ports:
+      - '9000:9000'
+      - '9090:9090'
+
+  mc:
+    image: minio/mc
+    depends_on: 
+    - minio
+    entrypoint: >
+        /bin/sh -c "
+        /usr/bin/mc config host add --quiet --api s3v4 local http://minio:9000 minioadmin minioadmin;
+        /usr/bin/mc rb --force local/bucketteste;
+        /usr/bin/mc mb --quiet local/bucketteste;
+        /usr/bin/mc anonymous --insecure policy download local/bucketteste;
+        /usr/bin/mc admin policy set download local/bucketteste;
+        "
+   
+
