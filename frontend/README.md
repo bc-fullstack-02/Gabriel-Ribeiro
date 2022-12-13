@@ -42,6 +42,7 @@
  <br>
 
 ## 🎨**Design**
+![Bootcamp Sysmap - Parrot1](https://user-images.githubusercontent.com/80289718/207448820-ba841c1b-e835-4a19-8e34-2ecfed327e0d.png)
 
  
 <!--  
