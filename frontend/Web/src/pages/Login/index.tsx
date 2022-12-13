@@ -20,8 +20,6 @@ function Login() {
       localStorage.setItem("profile", decodedToken.profile)
       localStorage.setItem("user", decodedToken.username)
       localStorage.setItem("accessToken", token)
-      console.log( jwt_decode(token))
-      console.log(window.localStorage);
 
       return navigate("/home");
 

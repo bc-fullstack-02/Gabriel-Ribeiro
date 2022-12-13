@@ -41,7 +41,6 @@ function AuthForm ({formTitle, submitFormButtonText, submitFormButtonAction, lin
             email: form.elements.email?.value,
             password: form.elements.password.value,
           };
-            console.log(auth)
         submitFormButtonAction(auth);
     }
 
