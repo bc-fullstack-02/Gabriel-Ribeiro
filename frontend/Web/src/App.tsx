@@ -5,7 +5,7 @@ import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import Home from './pages/Home'
 import ProfilePage from './pages/ProfilePage'
-import Friends from './components/Friends'
+import Friends from './pages/Friends'
 
 
 const router = createBrowserRouter([

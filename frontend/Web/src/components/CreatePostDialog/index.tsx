@@ -53,7 +53,10 @@ export default function CreatePostDialog({closeDialog}: CreatePostDialogProps) {
                   </div>
                 <label htmlFor="description" className='font-semibold'>O que você está pensando?</label>
                 <TextInput.Input id='description' placeholder='Diga o que está pensando...'/>
-              
+              {/* 
+                <label htmlFor="image" className='font-semibold'>Insira uma foto</label>
+                <input type="file" name="image" id="image" />
+            */}
 
               <footer className='mt-4 flex justify-end gap-4'>
                   <Dialog.Close type='button' className='bg-zinc-500 px-5 h-12 rounded-md font-semibold hover:bg-zinc-600'>Fechar</Dialog.Close>

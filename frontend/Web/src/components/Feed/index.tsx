@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Heading from '../Heading'
 import Text from '../Text'
 import api from '../../services/api'
+import getAuthHeader from '../../services/auth'
 
 
 interface Post {
@@ -18,15 +19,11 @@ interface Post {
 
 
 export default function Feed() {
-  const token = localStorage.getItem("accessToken")
+  const authHeader = getAuthHeader();
   const profile = localStorage.getItem("profile")
   const user = localStorage.getItem("user")
   const [posts, setPosts] = useState<Post[]> ( [] );
-  const authHeader = {
-    headers: {
-        Authorization: `Bearer ${token}`
-    }
-}
+
 
   useEffect(() => {
     async function getPosts(){

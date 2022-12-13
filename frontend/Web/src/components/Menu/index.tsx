@@ -8,9 +8,11 @@ import Text from '../../components/Text'
 import * as Dialog from '@radix-ui/react-dialog'
 
 
+
 export default function Menu() {
 
     const [open, setOpen] = useState(false);
+ 
     function closeDialog(){
         setOpen(false);
     }
@@ -21,13 +23,13 @@ export default function Menu() {
         <Text className="font-extrabold ml-4 text-white">Parrot</Text>
     </div>
     <ul>
-        <MenuItem menutitle='Página inicial'>
+        <MenuItem menutitle='Página inicial' route='/home'>
             <House size={48} weight="fill"/>
         </MenuItem>
-        <MenuItem menutitle='Perfil'>
+        <MenuItem menutitle='Perfil' route='/profile'>
             <User size={48} weight="fill"/>
         </MenuItem>
-        <MenuItem menutitle='Amigos'>
+        <MenuItem menutitle='Amigos' route='/friends'>
             <UsersThree size={48} weight="fill"/>
         </MenuItem>
    </ul>
