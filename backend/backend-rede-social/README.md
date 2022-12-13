@@ -1,7 +1,7 @@
-# 👩‍👦SOCIAL NETWORK - BACKEND
+# 🦜Parrot - BACKEND
 
 ## 💻 Sobre o projeto
- Esse projeto faz parte do programa de trainee da SYSMAP e trata-se de uma rede social feita em Node.js
+ Esse projeto faz parte do Programa Trainee SysMap de Excelência Full Stack | 2ª edição e trata-se do back-end de uma rede social feita em Node.js
  
 ## 🧰 Tecnologias utilizadas
 
@@ -25,10 +25,19 @@
 <br>
 
 ## 👩‍💻Instalação
- ### ```npm  install ```
- ### Rode o projeto com o script : ``` npm start```
- ### Criar um arquivo na pasta raiz do projeto chamado ".env" e inserir as seguintes propriedades no arquivo:
+ Para poder rodar este projeto, você deverá ter os seguintes programas instalados:
+ - Node.js
+ - Docker
+ - npm
+ ### Para começar, clone este projeto, entre na pasta raiz de "backend-rede-social" e  insira no terminal o comando abaixo:
+
+```
+docker-compose up
+```
+Entre no console do minio ex: http://localhost:9090/, selecione o bucket Sysmap, clique em "Manage" e depois clique em "Access Policy" e mude para "Public". Assim, as fotos upadas serão visíveis no front-end
  <br>
+
+ ## 🔢Variáveis de  ambiente
 
  ```
   MONGO_URI = {sua uri}
@@ -39,16 +48,12 @@
   MINIO_BUCKET_NAME = {nome do seu bucket}
 ```
  
- 
- ## 🐋Docker
-Caso você queira rodar a aplicação diretamente do docker insira o código abaixo:
+<!--  
+ ## ✅Checklist de implementações futuras 
+   - Automatizar a troca de policy do bucket gerado para um público
+   - socket.io com rabbitMQ -->
 
 
-<!---
-```
-docker run -p 3000:3000 -e "MONGO_URI={inserir aqui uri}" -e JWT_SECRET_KEY={inserir aqui chave} gahbr/vuttr
-```
--->
 ## 🦸 Autor
 
 <a href="https://github.com/Gahbr">
