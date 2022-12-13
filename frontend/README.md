@@ -1,9 +1,9 @@
-# 🦜Parrot - FRONT-END
+# 🦜**Parrot - FRONT-END**
 
-## 💻 Sobre o projeto
+## 💻 **Sobre o projeto**
  Esse projeto faz parte do Programa Trainee SysMap de Excelência Full Stack | 2ª edição e trata-se do front-end de uma rede social feita em React com Typescript
  
-## 🧰 Tecnologias utilizadas
+## 🧰 **Tecnologias utilizadas**
 
 * Typescript
 * React.js
@@ -13,17 +13,26 @@
 * JWT (JSON Web Token) Authentication
 
 
-## 🛣 Rotas
+## 🛣 **Rotas**
+  ### **Página para fazer autenticação de usuário**
+  ### ``` GET / ```
+  ### **Página principal**
+  ### ``` GET /HOME ```
+  ### **Ver seus amigos adicionados**
+  ### ``` GET /FRIENDS```
+  ### **Seu perfil**
+  ### ``` GET /PROFILE ```
   
+
 ###  
 
 <br>
 
-## 👩‍💻Instalação
+## **👩‍💻 Instalação**
  Para poder rodar este projeto, você deverá ter os seguintes programas instalados:
  - Node.js
  - npm
- - Ambiente de back-end da Rede social configurado e rodando {link para o repo back}
+ - Ambiente de [Back-end](https://github.com/bc-fullstack-02/Gabriel-Ribeiro/tree/main/backend/backend-rede-social) da Rede social configurado e rodando 
   
   ### Insira os comandos abaixo no terminal
  ### ```npm i``` 
@@ -32,6 +41,7 @@
 
  <br>
 
+## 🎨**Design**
 
  
 <!--  
