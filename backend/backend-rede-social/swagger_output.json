@@ -674,7 +674,29 @@
         ]
       },
       "put": {
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "637ff823173eb3ee85b5d09c"
+                },
+                "email": {
+                  "example": "Emailatualizado@mail.com"
+                },
+                "username": {
+                  "example": "Username atualizado"
+                },
+                "password": {
+                  "example": "senhaAtualizada"
+                }
+              }
+            }
+          }
+        ],
         "description": "This function update my user",
         "tags": [
           "User"
@@ -694,7 +716,20 @@
         ]
       },
       "delete": {
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "637ff823173eb3ee85b5d09c"
+                }
+              }
+            }
+          }
+        ],
         "description": "This function update my user",
         "tags": [
           "User"

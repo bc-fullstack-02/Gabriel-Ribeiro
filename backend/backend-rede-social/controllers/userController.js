@@ -23,48 +23,43 @@ const listUser = async (req,res) => {
 }
 
 const updateUser = async (req,res) => {
-    const user = await User.findById(req.params.id);
-    if(req.body.id == req.params.id ){
-        
+    const user = await User.findById(req.body.id);
+
+    if(user){
         if(req.body.password){
             try {
                 const salt = await bcrypt.genSalt(10);
                 req.body.password = await bcrypt.hash(req.body.password,salt)
-
             } catch (error) {
                 return res.status(500).json(error.message)
             }
         }
 
         try {
-            const user = await User.findByIdAndUpdate(req.params.id, {$set:req.body})
+            const userUpdate = await User.findByIdAndUpdate(req.body.id, {$set:req.body})
             res.status(200).json("Usuario atualizado")
         } catch (error) {
             console.log(error.message);
-            res.status(404).json("erro ao atualizar usuário")
-        }
-
-    }else{
-        return res.status(403).json("Você só pode atualizar sua conta")
+            return res.status(404).json("erro ao atualizar usuário")
+         }   
+    } else {
+        return res.status(500).json("Usuário não encontrado. Tente novamente.")
     }
 }
 
 const deleteUser = async (req, res) => {
-  const user = await User.findById(req.params.id);
-  if (req.body.id == req.params.id) {
+  const user = await User.findById(req.body.id);
+  
     try {
       if (user) {
         user.delete();
         res.status(200).json("Usuario deletado");
       } else {
-        res.json("Confira se o usuário está certo e tente novamente.");
+       return res.json("Confira se o usuário está certo e tente novamente.");
       }
     } catch (error) {
-      res.json(error.message);
+      return res.json(error.message);
     }
-  } else {
-    return res.status(500).json("Você só pode deletar a sua conta");
-  }
 };
 
 const followUser = async (req,res) => {
