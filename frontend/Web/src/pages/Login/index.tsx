@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 interface UserToken {
   profile : string;
-  user: string;
+  username: string;
 }
 
 function Login() {
@@ -16,16 +16,18 @@ function Login() {
       const { data } = await api.post("/security/login", auth);
       const { token } = data;
 
-      
-      localStorage.setItem("accessToken", token);
-      // console.log(jwt_decode(data.accessToken)) as UserToken;
-
+      const decodedToken = jwt_decode(token) as UserToken      
+      localStorage.setItem("profile", decodedToken.profile)
+      localStorage.setItem("user", decodedToken.username)
+      localStorage.setItem("accessToken", token)
+      console.log( jwt_decode(token))
       console.log(window.localStorage);
+
       return navigate("/home");
 
-    } catch (error) {
-      console.error(error)      
-      alert("Ocorreu algum erro n o login")
+    } catch (error: any) {
+      console.error(error.response.data)     
+      alert(error.response.data)
     }
   }
 
