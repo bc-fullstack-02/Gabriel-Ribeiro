@@ -751,145 +751,116 @@
     }
   },
   "definitions": {
-    "Comment": {
-      "required": [
-        "description",
-        "profile",
-        "post"
-      ],
-      "properties": {
-        "_id": {
-          "type": "string",
-          "description": ""
-        },
-        "description": {
-          "type": "string",
-          "description": "the comment"
-        },
-        "profile": {
-          "type": "Profile",
-          "description": ""
-        },
-        "post": {
-          "type": "Post",
-          "description": ""
-        }
-      }
-    },
-    "Login": {
-      "required": [
-        "user",
-        "password"
-      ],
-      "properties": {
-        "user": {
-          "type": "string",
-          "description": ""
-        },
-        "password": {
-          "type": "string",
-          "description": ""
-        }
-      }
-    },
-    "Registry": {
-      "required": [
-        "user",
-        "password"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": ""
-        },
-        "user": {
-          "type": "string",
-          "description": ""
-        },
-        "password": {
-          "type": "string",
-          "description": ""
-        }
-      }
-    },
-    "Post": {
-      "required": [
-        "title",
-        "description",
-        "profile"
-      ],
-      "properties": {
-        "_id": {
-          "type": "string",
-          "description": ""
-        },
-        "title": {
-          "type": "string",
-          "description": "title"
-        },
-        "description": {
-          "type": "string",
-          "description": "description"
-        },
-        "profile": {
-          "type": "Profile",
-          "description": "profile"
-        },
-        "comments": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Comment"
-          }
-        }
-      }
-    },
-    "Profile": {
-      "required": [
-        "name",
-        "user"
-      ],
-      "properties": {
-        "_id": {
-          "type": "string",
-          "description": ""
-        },
-        "name": {
-          "type": "string",
-          "description": ""
-        },
-        "user": {
-          "type": "User",
-          "description": "user"
-        },
-        "following": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Profile"
-          }
-        }
-      }
-    },
     "User": {
       "required": [
-        "user",
-        "password"
+        "username",
+        "password",
+        "email"
+      ],
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "John Doe"
+        },
+        "email": {
+          "type": "number",
+          "example": 69
+        },
+        "password": {
+          "type": "string",
+          "example": "minha senha Doe"
+        },
+        "followers": {
+          "type": "array"
+        },
+        "following": {
+          "type": "array"
+        },
+        "description": {
+          "type": "string",
+          "example": "John Doe"
+        }
+        
+      }
+    },
+
+    "Post": {
+      "type": "object",
+      
+      "properties": {
+        "userId": {
+          "type": "string",
+          "example": "6377b80915940791ed630f14"
+        },
+       
+        "title": {
+          "type": "string",
+          "example": "Título do Post"
+        },
+        "description": {
+          "type": "string",
+          "example": "Esse é um post interessante"
+        },
+        "image": {
+          "type": "string",
+          "example": "http://127.0.0.1:9000/sysmap/Post_1670899905209.jpeg"
+        },
+        "comments": {
+          "type": "object",
+          "example": [
+            "637bc43908ea42f21abdb91a"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "likes": {
+          "type": "array",
+          "example": [
+            "637bc43908ea42f21abdb91a"
+          ],
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "userId"
+      ]
+    },
+
+    "Comment": {
+      "required": [
+        "_id",
+        "userId",
+        "postId"
       ],
       "properties": {
         "_id": {
           "type": "string",
           "description": ""
         },
-        "user": {
+        "userId": {
           "type": "string",
           "description": ""
         },
-        "password": {
+        "postId": {
           "type": "string",
           "description": ""
         },
-        "profile": {
-          "type": "Profile",
-          "description": "profile of user"
+        "description": {
+          "type": "string",
+          "example": "Esse é um comentário interessante"
+        },
+        "likes": {
+          "type": "array",
+          "example": [
+            "637bc43908ea42f21abdb91a"
+          ],
+          "items": {
+            "type": "string"
+          }
         }
       }
     }
