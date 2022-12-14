@@ -44,7 +44,7 @@ services:
       - minio_data:/data
 
   createbuckets:
-    container_name: create bucket
+    container_name: createBucket
     image: minio/mc
     depends_on:
       - minio
