@@ -3,22 +3,6 @@ const Post = require('../models/Post');
 const { post } = require('../routes/usersRoute');
 const Minio = require('../middleware/minio');
 const User = require('../models/User');
-//const upload = require('../middleware/uploadFile')
-
-
-/* // criar um post
-const createPost = async(req,res) => {
-   
-    try {
-        const newPost = await Post.create(req.body);
-        res.status(200).json(newPost)
-
-    } catch (error) {
-        console.log(error.message);
-        res.status(500).json(error.message)
-    }
-}
- */
 
 const createPost =  async(req, res) => {
     try {
@@ -30,7 +14,6 @@ const createPost =  async(req, res) => {
             const newPost = await Post.create(req.body);
             const newPostId = newPost._id;
             const publicUrl = Minio.minioClient.protocol + '//' + Minio.minioClient.host + ':' + Minio.minioClient.port + '/' + Minio.bucketName + '/' + imageName
-            
             const post = await Post.findById(newPostId).updateOne({image:publicUrl});
             
             //atualizando campo profile

@@ -14,14 +14,11 @@ const authRoute = require('./routes/authRoute');
 const swaggerFile = require('./swagger_output.json')
 const swaggerUI = require('swagger-ui-express');
 const Auth = require('./middleware/auth')
-const Minio = require('./middleware/minio')
-const upload = require('./middleware/uploadFile')
 const cors = require('cors');
 
 //swagger
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerFile))
-//Criando um bucket no Minio 
-Minio.createBucket();
+
 
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser:true, useUnifiedTopology:true}, (err)=>{
     if(err) console.log(err) 
@@ -44,24 +41,6 @@ app.use('/posts', Auth.private, postRoute, commentRoute);
 app.use('/feed', Auth.private, feedRoute);
 
 
-/* app.get('/', (req,res) => {
-    res.send("<h1>SYSMAP PARROT</h1>")
-}) */
-
-
-//upar imagem para o minio --Testes--
-app.post("/uploadfile", upload.single('upfile'), (req, res) => {
- 
-    console.log(req.file);
-    
-      Minio.minioClient.fPutObject(Minio.bucketName, req.file.filename, req.file.path, function(error, etag) {
-        if(error) {
-            return console.log(error);
-        }
-        res.send(req.file);
-    });
-    
-  });
 
 
 

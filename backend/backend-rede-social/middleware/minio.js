@@ -2,15 +2,14 @@ require("dotenv").config();
 const Minio = require("minio");
 
 const minioClient = new Minio.Client({
-  accessKey: process.env.MINIO_ACCESS_KEY,
-  secretKey: process.env.MINIO_SECRET_KEY,
+  accessKey: process.env.MINIO_ROOT_USER,
+  secretKey: process.env.MINIO_ROOT_PASSWORD,
   endPoint: process.env.MINIO_ENDPOINT,
   useSSL: false,
   port: 1 * process.env.MINIO_PORT,
-  pathStyle: true,
 });
   
-const bucketName = process.env.MINIO_BUCKET_NAME
+const bucketName = 'sysmap'
 
 async function createBucket() {
   try {
