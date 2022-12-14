@@ -1,7 +1,7 @@
 # Gabriel Ribeiro -  Rede Social Parrot 🦜
 
 ## 💻 Sobre o projeto
- Esse projeto faz parte do Programa Trainee SysMap de Excelência Full Stack | 2ª edição e trata-se do back-end de uma rede social feita em Node.js
+ Esse projeto faz parte do Programa Trainee SysMap de Excelência Full Stack | 2ª edição e trata-se de uma aplicação full-stack de uma rede social feita em Node.js, React.ts e React Native
  
 ## 🧰 Tecnologias utilizadas
 
@@ -9,11 +9,13 @@
 * Express.js
 * Node.js
 * React.js
+* Tailwind CSS
 * React Native
 * MongoDB 
 * Documentação com SWAGGER
 * JWT (JSON Web Token) Authentication
 * Docker
+* Min.IO
 
 
 ## 🛣 Documentação 

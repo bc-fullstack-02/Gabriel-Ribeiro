@@ -21,6 +21,7 @@
 ## 🛣 Documentação SWAGGER
   Para acessar  a documentação SWAGGER e fazer os testes de requisições, use a seguinte rota :
 ###  ```GET /api-docs```
+###  ```localhost:3000/api-docs```
 
 <br>
 
@@ -34,7 +35,7 @@
 ```
 docker-compose up
 ```
-Entre no console do minio ex: http://localhost:9090/, selecione o bucket Sysmap, clique em "Manage" e depois clique em "Access Policy" e mude para "Public". Assim, as fotos upadas serão visíveis no front-end
+
  <br>
 
  ## 🔢Variáveis de  ambiente
