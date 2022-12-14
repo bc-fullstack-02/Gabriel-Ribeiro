@@ -1,4 +1,3 @@
 node_modules
 backend/backend-rede-social/.env
-backend/backend-rede-social/public/assets/uploads/
-backend/backend-rede-social/.dockerignore
+

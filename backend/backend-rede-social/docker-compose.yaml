@@ -4,6 +4,7 @@ name: Sysmap-Parrot
 services:
 
   backend: 
+    container_name: backend
     #image: gahbr/parrot
     build:
       context: ./
@@ -22,7 +23,6 @@ services:
       MINIO_PORT : 9000
       MINIO_ROOT_USER: minio
       MINIO_ROOT_PASSWORD: minio123
-      MINIO_BUCKET_NAME : sysmap
       
   mongodb:
     container_name: mongo
@@ -31,6 +31,7 @@ services:
       - 27017:27017
    
   minio:
+    container_name: minio
     image: minio/minio
     command: ["server", "--console-address", ":9001", "/data"]
     ports:
@@ -43,6 +44,7 @@ services:
       - minio_data:/data
 
   createbuckets:
+    container_name: create bucket
     image: minio/mc
     depends_on:
       - minio

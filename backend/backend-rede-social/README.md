@@ -42,11 +42,11 @@ docker-compose up
 
  ```
   MONGO_URI = {sua uri}
-  JWT_SECRET_KEY = {sua secret key}
-  MINIO_ENDPOINT= {endpoint do minio}
-  MINIO_ACCESS_KEY= {seu username do minio}
-  MINIO_SECRET_KEY= {sua senha do minio}
-  MINIO_BUCKET_NAME = {nome do seu bucket}
+  JWT_SECRET_KEY = {sua secret key para gerar o JWT}
+  MINIO_ENDPOINT= {seu endereço IPV4}
+  MINIO_ROOT_USER= {seu username do minio}
+  MINIO_ROOT_PASSWORD= {sua senha do minio}
+ 
 ```
  
 <!--  
