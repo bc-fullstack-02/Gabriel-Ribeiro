@@ -69,8 +69,8 @@ export default function Feed() {
                                 <p>{post.description}</p>
                             </Text>
                         </div>  
-                        <div className="ml-16 flex flex-col gap-2">
-                            <img  src={post.image} width={500} alt="imagem do post" />
+                        <div className="ml-16 flex flex-col gap-2 max-w-3xl">
+                            <img  src={post.image} alt="imagem do post" />
                         </div>                        
                         <div className="flex items-center ml-16 my-4 space-x-2">
                             <Chat size={24} className="text-slate-50" />

@@ -1,8 +1,9 @@
-import React, { FormEvent } from 'react'
+import React, { FormEvent, useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { TextInput } from '../TextInput'
 import Button from '../Button'
 import api from '../../services/api';
+import Dropzone from '../Dropzone';
 
 interface CreatePostDialogProps {
   closeDialog : () => void
@@ -10,6 +11,7 @@ interface CreatePostDialogProps {
 interface PostFormElements extends HTMLFormControlsCollection{
   title: HTMLInputElement;
   description: HTMLInputElement;
+  image: HTMLInputElement;
 }
 
 interface PostFormElement extends HTMLFormElement{
@@ -18,26 +20,32 @@ interface PostFormElement extends HTMLFormElement{
 
 export default function CreatePostDialog({closeDialog}: CreatePostDialogProps) {
   const token = localStorage.getItem("accessToken");
+  const profile = localStorage.getItem("profile");
+  const [selectedFile, setSelectedFile] = useState<File>()
   
 
-  async function handleSubmit(event: FormEvent<PostFormElement>){
+  async function handleSubmit(event: FormEvent<PostFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
-    const newPost = {
-      title: form.elements.title.value ,
-      description: form.elements.description.value
-    };
+
+    const data = new FormData();
+    data.append("title", form.elements.title.value);
+    data.append("description", form.elements.description.value);
+    if (selectedFile && profile) {
+      data.append("image", selectedFile);
+      data.append("userId", profile);
+    }
 
     try {
-      await api.post('/posts', newPost, {
-        headers:{
-          Authorization: `Bearer ${token}`
-        }
+      await api.post("/posts", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       closeDialog();
     } catch (error) {
-      alert("Erro ao criar o post")
-      console.log(error)
+      alert("Erro ao criar o post");
+      console.log(error);
     }
   }
 
@@ -53,10 +61,9 @@ export default function CreatePostDialog({closeDialog}: CreatePostDialogProps) {
                   </div>
                 <label htmlFor="description" className='font-semibold'>O que você está pensando?</label>
                 <TextInput.Input id='description' placeholder='Diga o que está pensando...'/>
-              {/* 
-                <label htmlFor="image" className='font-semibold'>Insira uma foto</label>
-                <input type="file" name="image" id="image" />
-            */}
+              
+                <Dropzone onFileUploaded ={setSelectedFile}/>
+           
 
               <footer className='mt-4 flex justify-end gap-4'>
                   <Dialog.Close type='button' className='bg-zinc-500 px-5 h-12 rounded-md font-semibold hover:bg-zinc-600'>Fechar</Dialog.Close>
