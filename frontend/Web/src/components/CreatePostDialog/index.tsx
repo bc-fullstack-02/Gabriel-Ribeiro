@@ -4,9 +4,10 @@ import { TextInput } from '../TextInput'
 import Button from '../Button'
 import api from '../../services/api';
 import Dropzone from '../Dropzone';
+import { Post } from '../../model/Post';
 
 interface CreatePostDialogProps {
-  closeDialog : () => void
+  postCreated : (post: Post) => void
 }
 interface PostFormElements extends HTMLFormControlsCollection{
   title: HTMLInputElement;
@@ -18,7 +19,7 @@ interface PostFormElement extends HTMLFormElement{
   readonly elements: PostFormElements
 }
 
-export default function CreatePostDialog({closeDialog}: CreatePostDialogProps) {
+export default function CreatePostDialog({postCreated}: CreatePostDialogProps) {
   const token = localStorage.getItem("accessToken");
   const profile = localStorage.getItem("profile");
   const [selectedFile, setSelectedFile] = useState<File>()
@@ -37,12 +38,12 @@ export default function CreatePostDialog({closeDialog}: CreatePostDialogProps) {
     }
 
     try {
-      await api.post("/posts", data, {
+      const response = await api.post("/posts", data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      closeDialog();
+      postCreated(response.data);
     } catch (error) {
       alert("Erro ao criar o post");
       console.log(error);

@@ -1,39 +1,19 @@
-import { Chat, Heart, UserCircle } from 'phosphor-react'
-import React, { useEffect, useState } from 'react'
+import { UserCircle } from 'phosphor-react'
+import {  useState } from 'react'
 import Heading from '../Heading'
 import Text from '../Text'
-import api from '../../services/api'
 import getAuthHeader from '../../services/auth'
 import { Post } from '../../model/Post'
 import PostItem from '../PostItem'
 
+interface FeedProps {
+  posts: Post[];
+  handleLike : (postId: String) => void;
+}
 
-export default function Feed() {
-  const authHeader = getAuthHeader();
-  const profile = localStorage.getItem("profile")
+export default function Feed( {posts, handleLike} : FeedProps) {
   const user = localStorage.getItem("user")
-  const [posts, setPosts] = useState<Post[]> ( [] );
-
-
-  useEffect(() => {
-    async function getPosts(){
-      const response = await api.get("/feed", authHeader);
-      setPosts(response.data)
-    }
-    getPosts()
-  }, []);
- 
-
-  async function handleLike(postId: String) {
-    try {
-      await api.post(`/posts/${postId}/like`, { userId: profile }, authHeader);
-     
-    } catch (err: any) {
-      console.error(err.response.data);
-    }
-  }
-
-  console.log(posts);
+ // const [posts, setPosts] = useState<Post[]> ( [] );
  
   return (
     <div className="basis-5/6 overflow-y-auto scroll-smooth">

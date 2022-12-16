@@ -22,14 +22,14 @@ export default function Dropzone({onFileUploaded} : DropzoneProps) {
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
   
     return (
-      <div className='flex flex-col'{...getRootProps()}>
+      <div className='flex flex-row MT-4'{...getRootProps()}>
         <input {...getInputProps()} />
         {
           selectedFileURL ? (
             <img src={selectedFileURL} alt="foto do post"/> ) : (
-          <p>
+          <p className='flex items-center gap-2'>
              <Image size={48} weight="thin"/>
-             <Text>Clique e arraste a imagem ou clique aqui para selecionar</Text>
+             <Text><a href="#">Clique e arraste a imagem ou clique aqui para selecionar</a></Text>
           </p>
         )}
       </div>

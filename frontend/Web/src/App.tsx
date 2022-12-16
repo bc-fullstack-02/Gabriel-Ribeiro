@@ -29,6 +29,10 @@ const router = createBrowserRouter([
   {
     path : "/friends",
     element: <Friends/>,
+  },
+  {
+    path : "/postDetail",
+    element: <Friends/>,
   }
 ])
 
