@@ -4,8 +4,9 @@ export interface Post {
     title: string,
     description: string,
     image: string,
-    userId : string
-    profile: string
+    userId : string,
+    profile: string,
     comments: [],
-    likes: []
+    likes: string[],
+    likedByUser ?: boolean;
   } 
