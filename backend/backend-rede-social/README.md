@@ -31,7 +31,10 @@
 
 ## 👩‍💻Instalação
 
-  Para começar, clone este projeto, entre na pasta raiz de "backend-rede-social" e  insira no terminal o comando abaixo:
+  * Clone este projeto
+  * Entre na pasta raiz de <i>"backend-rede-social"</i> e abra o arquivo <a href="https://github.com/bc-fullstack-02/Gabriel-Ribeiro/blob/main/backend/backend-rede-social/docker-compose.yaml">docker-compose.yaml</a>
+  * Altere a  variável  <b>MINIO_ENDPOINT </b> inserindo o seu endereço IPV4
+  * Após isso, insira no terminal o comando abaixo:
 
 ```
 docker-compose up
@@ -41,7 +44,9 @@ docker-compose up
 
 ## 🛣 Documentação SWAGGER
   Para acessar  a documentação SWAGGER e fazer os testes de requisições, use a seguinte rota :
-###  ```GET /api-docs```
+###  ```GET /api-docs``` 
+</br>
+
 ###  ```localhost:3000/api-docs```
 
 <br>
