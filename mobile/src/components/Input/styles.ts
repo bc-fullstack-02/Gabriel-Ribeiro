@@ -6,17 +6,19 @@ export const styles = StyleSheet.create({
         flexDirection:"row",
         alignItems:"center",
         borderWidth: 2,
-        borderColor:"red",
+        borderColor: THEME.COLORS.BACKGROUND_800,
         maxWidth: "100%",
-        minWidth: 140,
-        borderRadius: 10,
+        minWidth: 240,
+        borderRadius: 12,
         backgroundColor: THEME.COLORS.BACKGROUND_800,
-        padding: 8
+        padding: 8,
+        
     },
     input: {
         marginStart: 8,
-        color: THEME.COLORS.TEXT,
-        fontFamily: THEME.FONT_FAMILY.REGULAR
+        color: THEME.COLORS.CAPTION_400,
+        fontFamily: THEME.FONT_FAMILY.REGULAR,
+       
     },
   
 });
