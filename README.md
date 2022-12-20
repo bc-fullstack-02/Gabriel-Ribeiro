@@ -1,5 +1,10 @@
 # Gabriel Ribeiro -  Rede Social Parrot 🦜
 
+
+<p align="center">
+ <img  src="https://user-images.githubusercontent.com/80289718/208725397-62059674-482d-4a24-87ed-a13a0d36f88a.png" width="100px;" alt="Gabriel Ribeiro"/>
+</p>
+
 ## 💻 Sobre o projeto
  Esse projeto faz parte do Programa Trainee SysMap de Excelência Full Stack | 2ª edição e trata-se de uma aplicação full-stack de uma rede social feita em Node.js, React.ts e React Native
  
