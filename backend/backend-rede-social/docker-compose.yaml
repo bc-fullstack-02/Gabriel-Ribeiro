@@ -16,6 +16,7 @@ services:
     depends_on:
       - mongodb
       - minio
+      - rabbitmq
     environment:
       JWT_SECRET_KEY : sysmap
       MONGO_URI: mongodb://mongodb:27017/parrotdb
@@ -23,6 +24,7 @@ services:
       MINIO_PORT : 9000
       MINIO_ROOT_USER: minio
       MINIO_ROOT_PASSWORD: minio123
+      AMQP_URL: amqp://guest:guest@rabbitmq:5672
       
   mongodb:
     container_name: mongo
@@ -56,6 +58,13 @@ services:
       /usr/bin/mc anonymous set public minio/sysmap;
       exit 0;
       "
+  rabbitmq:
+    image: rabbitmq:3.11-management-alpine
+    container_name: rabbitmq
+    ports: 
+      - 5672:5672
+      - 15672:15672
+
 volumes:
   minio_data:
    
