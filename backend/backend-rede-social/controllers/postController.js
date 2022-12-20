@@ -11,7 +11,9 @@ const createPost =  async(req, res) => {
                 return console.log(error);
             }
             const imageName = req.file.filename;
-            const newPost = await Post.create(req.body);
+            const followers = await User.findById(req.body.userId).followers
+            const newPost = await Post.create(req.body).then(args => req.publish('post', followers, args))
+         
             const newPostId = newPost._id;
             const publicUrl = Minio.minioClient.protocol + '//' + Minio.minioClient.host + ':' + Minio.minioClient.port + '/' + Minio.bucketName + '/' + imageName
             const post = await Post.findById(newPostId).updateOne({image:publicUrl});
