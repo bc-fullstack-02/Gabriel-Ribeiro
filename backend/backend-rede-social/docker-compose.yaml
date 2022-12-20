@@ -5,6 +5,7 @@ services:
 
   backend: 
     container_name: backend
+    restart: always
     #image: gahbr/parrot
     build:
       context: ./
