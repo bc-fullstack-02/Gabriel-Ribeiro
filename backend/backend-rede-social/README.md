@@ -16,7 +16,28 @@
 * JWT (JSON Web Token) Authentication
 * Docker
 * Mini IO
+* RabbitMQ
+* Rascal
 
+<br>
+
+## ⚙ Requisitos
+ Para poder rodar este projeto, você deverá ter os seguintes programas instalados:
+ - Node.js
+ - Docker
+ - npm
+  
+  <br>
+
+## 👩‍💻Instalação
+
+  Para começar, clone este projeto, entre na pasta raiz de "backend-rede-social" e  insira no terminal o comando abaixo:
+
+```
+docker-compose up
+```
+
+ <br>
 
 ## 🛣 Documentação SWAGGER
   Para acessar  a documentação SWAGGER e fazer os testes de requisições, use a seguinte rota :
@@ -24,19 +45,6 @@
 ###  ```localhost:3000/api-docs```
 
 <br>
-
-## 👩‍💻Instalação
- Para poder rodar este projeto, você deverá ter os seguintes programas instalados:
- - Node.js
- - Docker
- - npm
- ### Para começar, clone este projeto, entre na pasta raiz de "backend-rede-social" e  insira no terminal o comando abaixo:
-
-```
-docker-compose up
-```
-
- <br>
 
  ## 🔢Variáveis de  ambiente
 
