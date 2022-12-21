@@ -26,7 +26,7 @@ export default function Dropzone({onFileUploaded} : DropzoneProps) {
         <input {...getInputProps()} />
         {
           selectedFileURL ? (
-            <img src={selectedFileURL} alt="foto do post"/> ) : (
+            <img src={selectedFileURL} alt="foto do post" className='max-h-96'/> ) : (
           <p className='flex items-center gap-2'>
              <Image size={48} weight="thin"/>
              <Text><a href="#">Clique e arraste a imagem ou clique aqui para selecionar</a></Text>

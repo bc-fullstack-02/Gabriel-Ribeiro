@@ -5,6 +5,7 @@ import Text from '../Text'
 import api from '../../services/api'
 import getAuthHeader from '../../services/auth'
 import { Post } from '../../model/Post'
+import { Link } from 'react-router-dom'
 
 
 interface PostItemProps {
@@ -21,7 +22,7 @@ export default function PostItem({post, handleLike} : PostItemProps ) {
         <Text className="font-extrabold ml-2">{post.profile}</Text>
     </div>
     <div className="ml-16 flex flex-col gap-2">
-        <Heading size="sm">{post.title}</Heading>
+      <Link to={`/posts/${post._id}`}>  <Heading size="sm">{post.title}</Heading></Link>
         <Text asChild >
             <p>{post.description}</p>
         </Text>
@@ -30,12 +31,11 @@ export default function PostItem({post, handleLike} : PostItemProps ) {
         <img src={post.image} alt="imagem do post" className='rounded-lg max-w-2xl max-h-2xl'/>
     </div>                        
     <div className="flex items-center ml-16 my-4 space-x-2">
-        <Chat size={24} className="text-slate-50" />
+        <Link to={`/posts/${post._id}`}>   <Chat size={24} className="text-slate-50" /></Link>
         <Text size="sm">{post.comments.length}</Text>
         
         <div className="hover:bg-red-600 rounded-full p-1" onClick={() => handleLike(post._id)}>
             {post.likes.includes(profile) ?  <Heart size={24} className="text-red-500" weight='fill' /> : <Heart size={24} className="text-slate-50" />  }
-           
         </div>                    
         <Text size="sm">{post.likes.length}</Text>
     </div>
