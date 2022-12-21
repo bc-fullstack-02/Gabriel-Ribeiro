@@ -4,6 +4,7 @@ import Feed from '../../components/Feed'
 import api from '../../services/api';
 import { Post } from '../../model/Post';
 import getAuthHeader from '../../services/auth';
+import { likePost, unlikePost } from '../../services/posts';
 
 export default function Home() {
   const authHeader = getAuthHeader();
@@ -22,42 +23,23 @@ export default function Home() {
  
 
   async function handleLike(postId: String) {
-     const likedPost =  posts.filter(post => post._id === postId).map(post => post.likes.includes(profile))
-     
-    if (likedPost && !likedPost [0]){
-      likePost(postId );
-    
-    }else {
-      unlikePost(postId)
-    }
-  }
-
-  async function likePost(postId: String) {
-    try {
-      await api.post(`/posts/${postId}/like`, { userId: profile }, authHeader);
-      const newPost = posts.filter((post) => post._id === postId).map((post) => { post.likes.push(profile); return post;})
+     const [post, ...rest] =  posts.filter(post => post._id === postId)
+     try {
+      if (post && !post.likes.includes(profile)){
+        const newPost = await likePost(post, profile);
+        changePostItem(newPost);
       
-      changePostItem(newPost[0]);
-    } catch (err: any) {
-      console.error(err.response.data);
-    }
+      }else {
+        const newPost = await unlikePost(post, profile);
+        changePostItem(newPost)
+      }
+     } catch (error) {
+       console.error(error);
+     }
+    
+   
   }
-
-  async function unlikePost(postId: String) {
-    try {
-      await api.post(`/posts/${postId}/like`, { userId: profile }, authHeader);
-      const newPost = posts.filter((post) => post._id === postId).map((post) => {
-        const index= post.likes.indexOf(profile);
-        post.likes.splice(index,1);
-        return post;
-      });
-      changePostItem(newPost[0])
-     
-    } catch (err: any) {
-      console.error(err.response.data);
-    }
-  }
-
+  
   function changePostItem(newPost : Post){
     setPosts((posts) =>{
       const post = newPost

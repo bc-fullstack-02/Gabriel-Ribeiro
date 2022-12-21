@@ -9,7 +9,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { Post } from '../../model/Post'
 
 interface MenuProps {
-    newPostCreated : (post: Post) => void;
+    newPostCreated ?: (post: Post) => void;
 }
 
 export default function Menu(props : MenuProps) {
@@ -18,7 +18,7 @@ export default function Menu(props : MenuProps) {
  
     function postCreated(post: Post){
         setOpen(false);
-        props.newPostCreated(post);
+        props.newPostCreated && props.newPostCreated(post);
     }
     return (
         <div className='basis-1/6 border-r border-slate-400 ml-4 pt-4'>

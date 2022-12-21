@@ -9,7 +9,7 @@ import { Post } from '../../model/Post'
 
 interface PostItemProps {
     post : Post
-    handleLike: (postId: String) => void
+    handleLike: (postId: string) => void
 }
 
 export default function PostItem({post, handleLike} : PostItemProps ) {
