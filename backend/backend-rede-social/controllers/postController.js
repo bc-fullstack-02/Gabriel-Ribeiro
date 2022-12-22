@@ -36,7 +36,7 @@ const createPost =  async(req, res) => {
 // listar posts -- timeline
 const listPost = async(req,res) =>{
     try {
-        const list = await Post.find().populate({path:'comments', select:'description'});
+        const list = await Post.find().populate({path:'comments', select:['description', 'profile']});
         res.status(200).json(list)
     } catch (error) {
         res.status(500).json(error.message)
@@ -94,7 +94,7 @@ const likePost = async (req,res) =>{
 
 const listOnePost = async (req,res) =>{
     try {
-        const post = await Post.findById(req.params.id).populate({path:'comments',select:'description'});
+        const post = await Post.findById(req.params.id).populate({path:'comments', select:['description', 'profile']});
         res.status(200).json(post)
 
     } catch (error) {

@@ -20,12 +20,10 @@ const CommentSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
-      
-      /* ,
-      likes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-      }] */
+      profile: {
+        type: String,
+        default : '',
+      }
 
 
   },  {timestamps:true})

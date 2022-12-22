@@ -25,6 +25,7 @@ interface comments {
   description: string;
   _id ?: string;
   userId: string;
+  profile: string;
 }
 export default function PostDetail() {
     const {postId} = useParams();
@@ -110,7 +111,7 @@ export default function PostDetail() {
           <li className='my-8 border rounded-lg'key={comment._id}>
             <div className='flex flex-row items-center gap-2'>
             <UserCircle size={24} weight="light" className='text-slate-50'/>
-            <Text>{comment.userId}</Text>
+            <Text>{comment.profile}</Text>
             </div>
             <Text size='md'>
               {comment.description}

@@ -6,11 +6,13 @@ const createComment = async (req, res) => {
   try {
     const user = await User.findById(req.body.userId);
     const post = await Post.findById(req.body.postId );
-
+    const profileName = user.username;
+    
     const comment = await Comment.create({
       description: req.body.description,
       userId: user._id,
-      postId: post._id
+      postId: post._id,
+      profile: profileName
     });
     // const autor = await Person.findById('637d49afb8827d7f5549d052').updateOne({$push:{stories:story1}})  //.author.stories.push(story1);
     const commentPost = await post.updateOne({$push:{comments:comment}})
@@ -25,7 +27,7 @@ const createComment = async (req, res) => {
 
 const listComments = async (req, res) => {
   try {
-    const post = await Post.findById(req.params.postId).populate({path:'comments', select:'description'});
+    const post = await Post.findById(req.params.postId).populate({path:'comments',  select:['description', 'profile']});
 
     res.json(post.comments);
   } catch (error) {
