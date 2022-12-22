@@ -1,4 +1,4 @@
-import { Chat, Heart, UserCircle } from 'phosphor-react'
+import { Chat, Heart, Trash, UserCircle } from 'phosphor-react'
 import React, { useEffect, useState } from 'react'
 import Heading from '../Heading'
 import Text from '../Text'
@@ -15,6 +15,18 @@ interface PostItemProps {
 
 export default function PostItem({post, handleLike} : PostItemProps ) {
     const profile = localStorage.getItem("profile") as string;
+    const token = localStorage.getItem("accessToken") as string;
+    const user = localStorage.getItem("user") as string;
+
+    async function handleDeletePost(){
+      if(window.confirm("Deseja deletar esse post?") == true){
+        await api.delete(`/posts/${post._id}`,{ data: { userId: profile }, headers: {
+            Authorization: `Bearer ${token}`
+        }});
+        location.reload()
+      }  
+    }
+
   return (
     <div className="border-b border-slate-400 mt-4" key={post._id}>
     <div className="flex flex-row items-center ml-5 my-4">
@@ -22,7 +34,14 @@ export default function PostItem({post, handleLike} : PostItemProps ) {
         <Text className="font-extrabold ml-2">{post.profile}</Text>
     </div>
     <div className="ml-16 flex flex-col gap-2">
-      <Link to={`/posts/${post._id}`}>  <Heading size="sm">{post.title}</Heading></Link>
+    <div className='flex flex-row justify-between'> <Link to={`/posts/${post._id}`}>
+          <Heading size="sm">{post.title}</Heading></Link>
+          {post.profile == user &&
+            <a onClick={ handleDeletePost}><Trash className=' text-rose-900' size={40} /></a>
+          }
+          
+    </div>
+     
         <Text asChild >
             <p>{post.description}</p>
         </Text>

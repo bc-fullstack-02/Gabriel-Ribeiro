@@ -5,11 +5,12 @@ import api from '../../services/api';
 import getAuthHeader from '../../services/auth';
 import Menu from '../../components/Menu';
 import PostItem from '../../components/PostItem';
-import { like, likePost, unlikePost } from '../../services/posts';
+import {likePost, unlikePost } from '../../services/posts';
 import Text from '../../components/Text';
 import { TextInput } from '../../components/TextInput';
 import Button from '../../components/Button';
-import { UserCircle } from 'phosphor-react';
+import { Trash, UserCircle } from 'phosphor-react';
+import { comments } from '../../model/Comment';
 
 interface CommentFormElements extends HTMLFormControlsCollection {
   description: HTMLInputElement;
@@ -21,12 +22,7 @@ interface CommentFormElement extends HTMLFormElement {
   readonly elements : CommentFormElements
 }
 
-interface comments {
-  description: string;
-  _id ?: string;
-  userId: string;
-  profile: string;
-}
+
 export default function PostDetail() {
     const {postId} = useParams();
     const [postDetail, setPostDetail] = useState<Post>();
@@ -85,8 +81,7 @@ export default function PostDetail() {
         console.error(error);
       }
     }
-    
-
+  
   return (
     <div className='w-screen h-screen flex'>
         <Menu />   
@@ -111,11 +106,19 @@ export default function PostDetail() {
           <li className='my-8 border rounded-lg'key={comment._id}>
             <div className='flex flex-row items-center gap-2'>
             <UserCircle size={24} weight="light" className='text-slate-50'/>
-            <Text>{comment.profile}</Text>
+            <Text size='lg'>{comment.profile}</Text>
             </div>
-            <Text size='md'>
+            <div className='flex flex-row justify-between'>
+            <Text size='lg' className='pl-7'>
               {comment.description}
             </Text>
+            
+            {comment.profile == user &&
+             <a onClick={ async ()=> { await api.delete(`/posts/${postId}/comments/${comment._id}`,getAuthHeader())}}>
+                <Trash className='pb-2 text-rose-900' size={40} />
+             </a>
+            }
+            </div>
           </li>)}
         </ul>
         </div>

@@ -58,7 +58,7 @@ export default function CreatePostDialog({postCreated}: CreatePostDialogProps) {
           <form className='mt-8 flex flex-col gap-4' onSubmit={handleSubmit}>
               <div className='flex flex-col gap-2'>
                     <label htmlFor="description" className='font-semibold'>Título do post</label>
-                    <TextInput.Input id='title' placeholder='Qual o título do post'/>
+                    <TextInput.Input id='title' placeholder='Qual o título do post' required/>
                   </div>
                 <label htmlFor="description" className='font-semibold'>O que você está pensando?</label>
                 <TextInput.Input id='description' placeholder='Diga o que está pensando...'/>
