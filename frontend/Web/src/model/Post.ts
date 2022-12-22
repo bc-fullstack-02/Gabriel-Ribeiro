@@ -6,7 +6,7 @@ export interface Post {
     image: string,
     userId : string,
     profile: string,
-    comments: [],
+    comments: string[],
     likes: string[],
     likedByUser ?: boolean;
   } 

@@ -21,10 +21,15 @@ interface CommentFormElement extends HTMLFormElement {
   readonly elements : CommentFormElements
 }
 
+interface comments {
+  description: string;
+  _id ?: string;
+  userId: string;
+}
 export default function PostDetail() {
     const {postId} = useParams();
     const [postDetail, setPostDetail] = useState<Post>();
-    const [comments, setComments] = useState([]);
+    const [comments, setComments] = useState<comments[]>([]);
     const profile = localStorage.getItem("profile") as string;
     const user = localStorage.getItem("user") as string;
     console.log(comments)
@@ -73,7 +78,7 @@ export default function PostDetail() {
       setComments([comment, ...comments]);
       setPostDetail((post) =>{
         post?.comments.push(comment);
-        return {...post}
+        return post;
       })
       } catch (error) {
         console.error(error);
