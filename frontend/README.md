@@ -42,9 +42,13 @@
  <br>
 
 ## 🎨**Design**
+
 ![Bootcamp Sysmap - Parrot1](https://user-images.githubusercontent.com/80289718/207448820-ba841c1b-e835-4a19-8e34-2ecfed327e0d.png)
 
- 
+ ## Para acessar o Design no Figma, clique no link abaixo:
+### [Figma](https://www.figma.com/file/vepLgESqoFwshCzJ5lqPkn/bootcamp-2?node-id=0%3A1&t=4Xz04BTRIDXUrVZl-0)
+
+<br>
 <!--  
  ## ✅Checklist de implementações futuras 
    - Automatizar a troca de policy do bucket gerado para um público

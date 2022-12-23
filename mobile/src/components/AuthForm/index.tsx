@@ -15,23 +15,18 @@ import { Spacer } from "../Spacer";
 import { User, Lock } from "phosphor-react-native";
 import { THEME } from "../../Theme";
 import { Button } from "../Button";
+import logo from '../../../assets/images/logo.png'
+import { Auth } from "../../@types/auth";
 
 
-export interface Auth {
-    user: string;
-    name ?: string;
-    password: string;
-}
 interface AuthFormProps {
     formTitle: string;
     submitFormButtonText: string;
     submitFormButtonAction : (auth: Auth) => void;
-    linkDescription: string;
-    routeName: string;
     showNameInput ?: string;
 }
-export function AuthForm({formTitle, submitFormButtonText, submitFormButtonAction, linkDescription} : AuthFormProps) {
-  const [user, setUser] = useState("");
+export function AuthForm({formTitle, submitFormButtonText, submitFormButtonAction} : AuthFormProps) {
+  const [username, setUser] = useState("");
   const [password, setPassword] = useState("");
 
   return (
@@ -41,9 +36,9 @@ export function AuthForm({formTitle, submitFormButtonText, submitFormButtonActio
       behavior={Platform.OS === "ios" ? "padding" : "position"}
     >
       <Image
-        source={require("../../../assets/images/logo.png")}
-        style={require("../../../assets/images/logo.png")}
-        resizeMethod="scale"
+        source={logo}
+        style={logo}
+        resizeMethod="auto"
       />
       <Heading title="Sysmap Parrot" subtitle={formTitle} />
       <Input.Root>
@@ -51,7 +46,7 @@ export function AuthForm({formTitle, submitFormButtonText, submitFormButtonActio
           <User color={THEME.COLORS.CAPTION_400} />
         </Input.Icon>
         <Input.Input
-          value={user}
+          value={username}
           onChangeText={setUser}
           placeholder="Digite o seu usuário"
           autoCapitalize="none"
@@ -67,15 +62,17 @@ export function AuthForm({formTitle, submitFormButtonText, submitFormButtonActio
           value={password}
           onChangeText={setPassword}
           placeholder="Digite a sua senha"
+          placeholderTextColor={THEME.COLORS.INPUT}
           autoCapitalize="none"
           autoCorrect
           secureTextEntry
         />
       </Input.Root>
       <Spacer />
-      <Button title={submitFormButtonText} onPress={() => submitFormButtonAction({user,password})} />
+      <Button title={submitFormButtonText} onPress={() => submitFormButtonAction({username,password})} />
       <Spacer />
-      <Text style={styles.link}>{linkDescription}</Text>
     </KeyboardAvoidingView>
   );
 }
+
+export { Auth };
