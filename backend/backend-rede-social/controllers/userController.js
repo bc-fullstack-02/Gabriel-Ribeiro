@@ -77,7 +77,7 @@ const followUser = async (req,res) => {
             }else{
                 await followedUser.updateOne({$pull:{followers:req.body.id}})
                 await currentUser.updateOne({$pull:{following:req.params.id}})
-                res.status(403).json("Você deixou de seguir essa pessoa.")
+                res.status(200).json("Você deixou de seguir essa pessoa.")
             }
         } catch (error) {
             res.status(500).json(error.message)

@@ -8,7 +8,7 @@ import Text from '../Text'
 
 export default function Profiles() {
   const user = localStorage.getItem("user")
-  const profileID = localStorage.getItem("profile")
+  const profileID = localStorage.getItem("profile") as string
   const authHeader = getAuthHeader();
   const [profiles, setProfiles] = useState<ProfileProps[]> ([]);
  
@@ -23,14 +23,14 @@ export default function Profiles() {
     const getProfiles = async () =>{
         try {
            const response = await api.get('/profiles', authHeader );
-           const profiles = await response.data.map((profile: { followers: (string | null)[]; }) => {
-            return {
-                ... profile,
-                followButtonDisabled: profile.followers.includes(profileID)
-            }
-           })
+          const profiles = response.data.map((profile: ProfileProps) => {
+                return {
+                    ...profile,
+                    followButtonDisabled: profile.followers.includes(profileID)
+                };
+              });
 
-            setProfiles(response.data)
+            setProfiles(profiles)
             console.log(response.data);
         } catch (error) {
             console.error(error)
@@ -41,7 +41,8 @@ export default function Profiles() {
 
   async function handleFollow(userID: string ){
     try {
-        await api.post(`/profiles/${userID}/follow`, {id:profileID}, authHeader)
+        await api.post(`/profiles/${userID}/follow`, {id:profileID}, authHeader);
+        changeButtonStatus(userID, true);
     } catch (error:any) {
         console.error(error.response.data);
     }
@@ -49,13 +50,25 @@ export default function Profiles() {
 
   async function handleUnfollow(userID: string ){
     try {
-        await api.post(`/profiles/${userID}/follow`, {id:profileID}, authHeader)
+        await api.post(`/profiles/${userID}/follow`, {id:profileID}, authHeader);
+        changeButtonStatus(userID, false);
     } catch (error:any) {
         console.error(error.response.data);
     }
   }
 
+  function changeButtonStatus(userID: string, buttonDisabled: boolean ) {
+    setProfiles((profiles) => {
+        const newProfiles = profiles.map((profile) => {
 
+            if (profile._id == userID) {
+                profile.followButtonDisabled = buttonDisabled;
+            }
+            return profile;
+        });
+        return [ ...newProfiles];
+    })
+  }
   return (
     <div className='basis-5/6'>
       <Heading className="border-b border-slate-400 mt-4">
