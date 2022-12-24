@@ -537,7 +537,7 @@
       "get": {
         "parameters": [
           {
-            "name": "id",
+            "name": "username",
             "in": "path",
             "description": "username do usuário.",
             "required": true,
