@@ -48,7 +48,7 @@ export function AuthForm({formTitle, submitFormButtonText, submitFormButtonActio
         <Input.Input
           value={username}
           onChangeText={setUser}
-          placeholder="Digite o seu usuário"
+          placeholder="Digite o seu usuário.."
           autoCapitalize="none"
           autoCorrect
         />
@@ -70,9 +70,8 @@ export function AuthForm({formTitle, submitFormButtonText, submitFormButtonActio
       </Input.Root>
       <Spacer />
       <Button title={submitFormButtonText} onPress={() => submitFormButtonAction({username,password})} />
-      <Spacer />
     </KeyboardAvoidingView>
   );
 }
 
-export { Auth };
+//export { Auth };

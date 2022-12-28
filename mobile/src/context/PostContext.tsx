@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { ReactNode, useReducer } from "react";
 import { Action } from "../@types/reducer";
 import api from "../services/api";
 import { Context } from "./AuthContext";
@@ -23,7 +23,7 @@ const Provider = ({children} : {children: ReactNode}) =>{
 
     const getPost = async ()=>{
         try {
-            const response = await api.get
+            const response = await api.get("/posts")
         } catch (error) {
             console.error(error);
         }

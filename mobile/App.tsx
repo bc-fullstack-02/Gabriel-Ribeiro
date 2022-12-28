@@ -53,7 +53,7 @@ const myTheme ={
             }}
           >
             <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Register" component={SignUp} />
+            <Stack.Screen name="SignUp" component={SignUp} />
           </Stack.Navigator>
         ) : (
           <Tab.Navigator screenOptions={({route}) =>({

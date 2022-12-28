@@ -3,7 +3,18 @@ import api from "../services/api";
 import jwt_decode from 'jwt-decode'
 import * as SecureStore from "expo-secure-store"
 import { Action } from "../@types/reducer";
-import { Auth, UserToken } from "../@types/auth";
+//import { Auth, UserToken } from "../@types/auth";
+export interface Auth {
+    username: string;
+    name ?: string;
+    password: string;
+}
+
+export interface UserToken {
+    profile : string;
+    username: string;
+
+}
 
 interface IAuthContext {
     token: string | null;
@@ -51,16 +62,17 @@ const Provider = ({children} : {children : ReactNode}) =>{
     const login = async ({username, password} :Auth) =>{
         try {
             const response = await api.post("/security/login", {username,password});
-            const {accessToken} = response.data;
-            const {profile,user: userName} = jwt_decode(accessToken) as UserToken;
+            console.log(response)
+            const {token} = response.data;
+            const {profile, username: usuario} = jwt_decode(token) as UserToken;
             
-            await SecureStore.setItemAsync("token",accessToken);
-            await SecureStore.setItemAsync("user",userName);
+            await SecureStore.setItemAsync("token",token);
+            await SecureStore.setItemAsync("user",usuario);
             await SecureStore.setItemAsync("profile",profile);
 
             dispatch({
                 type: "login",
-                payload : { token: accessToken, profile, user: userName}
+                payload : { token: token, profile, user: usuario}
             })
         } catch (error) {
             console.error(error);
@@ -73,7 +85,7 @@ const Provider = ({children} : {children : ReactNode}) =>{
 
     const register = async ({username, password} : Auth) =>{
         try {
-            await api.post(`/security/register`, {username, password});
+            await api.post("/security/register", {username, password});
 
             dispatch({
                 type:"user_created",
@@ -102,7 +114,6 @@ const Provider = ({children} : {children : ReactNode}) =>{
 
     const logout = async ( ) =>{
         try {
-          
             
             await SecureStore.deleteItemAsync("token");
             await SecureStore.deleteItemAsync("user");

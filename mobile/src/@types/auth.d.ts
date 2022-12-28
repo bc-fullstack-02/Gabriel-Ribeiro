@@ -9,3 +9,10 @@ export interface UserToken {
     user: string;
 
 }
+
+export interface RegisterAuth {
+    username: string;
+    email : string;
+    name ?: string;
+    password: string;
+}

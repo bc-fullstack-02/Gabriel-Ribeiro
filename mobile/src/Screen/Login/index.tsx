@@ -26,9 +26,11 @@ export function Login( {navigation}: LoginProps) {
       submitFormButtonText="Entrar"
       submitFormButtonAction={login}
     />
+
     <TouchableOpacity onPress={handleRegisterClick}>
       <Text style={styles.link}>Não possui conta? Crie uma agora!</Text>
     </TouchableOpacity>
+
     {errorMessage && (
       <Spacer>
         <Text style={styles.errorMessage}>{errorMessage}</Text>
