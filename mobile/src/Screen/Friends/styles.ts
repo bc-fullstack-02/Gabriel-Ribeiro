@@ -8,5 +8,9 @@ export const styles = StyleSheet.create({
     fontFamily: THEME.FONT_FAMILY.REGULAR,
     textAlign: "center",
     textDecorationLine:"underline"
-   }
+   }, 
+   container:{
+      flex:1,
+      paddingTop:12,
+   },
 });

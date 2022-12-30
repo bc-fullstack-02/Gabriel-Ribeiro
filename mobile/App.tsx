@@ -14,6 +14,8 @@ import { useContext, useEffect } from "react";
 import { Friends } from "./src/Screen/Friends";
 import { House, User, UsersThree } from "phosphor-react-native";
 import { Provider as PostProvider } from "./src/context/AuthContext";
+import { HomeNavigationScreen } from "./src/Screen/HomeNavigationScreen";
+import { navigationRef } from "./RootNavigator";
 
 const myTheme ={
   ...DefaultTheme,
@@ -44,7 +46,7 @@ const myTheme ={
   return (
     <SafeAreaProvider>
       {fontsLoaded ? (
-        <NavigationContainer theme = {myTheme}>
+        <NavigationContainer theme = {myTheme} ref={navigationRef}>
           {!token ?  (
             <Stack.Navigator
             screenOptions={{
@@ -59,7 +61,7 @@ const myTheme ={
           <Tab.Navigator screenOptions={({route}) =>({
             tabBarIcon:({color, size}) =>{
               switch (route.name){
-                case "Home": 
+                case "HomeNavigation": 
                   return <House size={size} color={color}/>;
                 case "Friends": 
                   return <UsersThree size={size} color={color}/>;
@@ -71,7 +73,7 @@ const myTheme ={
             tabBarShowLabel: false,
             headerShown:false,
           })}>
-            <Tab.Screen name="Home" component={Home}/>
+            <Tab.Screen name="HomeNavigation" component={HomeNavigationScreen}/>
             <Tab.Screen name="Friends" component={Friends}/>
             <Tab.Screen name="Profile" component={Profile}/>
           </Tab.Navigator>

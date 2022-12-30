@@ -130,12 +130,11 @@ const Provider = ({children} : {children : ReactNode}) =>{
     };
 
     return (
-        <Context.Provider value={{
-            ...state, login, register, tryLocalLogin, logout
-        }}>
-            {children}
-        </Context.Provider>
-    )
+      <Context.Provider
+        value={{...state,login,register,tryLocalLogin,logout}}>
+        {children}
+      </Context.Provider>
+    );
 }
 
 export { Provider, Context}

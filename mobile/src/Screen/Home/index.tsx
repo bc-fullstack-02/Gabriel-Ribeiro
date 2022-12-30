@@ -1,38 +1,57 @@
-import { Chat, Heart, UserCircle } from "phosphor-react-native";
-import React, { useContext, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import {
+  Chat,
+  Heart,
+  Pencil,
+  PencilSimple,
+  UserCircle,
+} from "phosphor-react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
-
+import { Context as PostContext } from "../../context/PostContext";
 import { Context as AuthContext } from "../../context/AuthContext";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { FocusAwareStatusBar } from "../../components/FocusAwareStatusBar";
+import { THEME } from "../../Theme";
+import { PostItem } from "../../components/PostItem";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-export function Home( ) {
-  const {user} = useContext(AuthContext);
+interface HomeProps {
+  navigation: NativeStackNavigationProp<any, any>;
+}
 
+export function Home({ navigation }) {
+  const { user } = useContext(AuthContext);
+  const { getPosts, posts } = useContext(PostContext);
+
+  useEffect(() => {
+    getPosts && getPosts();
+  }, []);
+
+  function handlePencilClick() {
+    navigation.navigate("CreatePost");
+  }
   return (
-   <View style = {styles.container}>
-    <View style ={styles.heading}>
-      <UserCircle color="white" size={48} weight ="thin"/>
-      <Text style ={styles.usernameText}>{user}</Text>
-    </View>
-    <View style={styles.content}>
-      <View style={styles.post}>
-      <View style={styles.postHeading}>
+    <SafeAreaView style={styles.container}>
+      <FocusAwareStatusBar
+        barStyle="light-content"
+        backgroundColor={THEME.COLORS.BACKGROUND_800}
+      />
+      <View style={styles.heading}>
         <UserCircle color="white" size={48} weight="thin" />
-        <Text style={styles.postUserText}>Fulano</Text>
+        <Text style={styles.usernameText}>{user}</Text>
+        <View style={{ flex: 1 }}></View>
+        <TouchableOpacity onPress={handlePencilClick}>
+          <PencilSimple color="white" size={40} weight="thin" />
+        </TouchableOpacity>
       </View>
-      <View style={styles.contentBody}>
-        <Text style={styles.contentText}>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio, unde explicabo dolorum quos voluptatum excepturi tempore, recusandae cupiditate nostrum officia minus voluptate earum iste. Voluptas, itaque possimus. Modi consequuntur repellendus dolorum facere, harum, facilis autem dolor dolore asperiores veritatis excepturi!
-        </Text>
+      <View style={styles.content}>
+        <FlatList
+          data={posts}
+          keyExtractor={({ _id }) => _id}
+          renderItem={({ item }) => <PostItem post={item} />}
+        />
       </View>
-      <View style={styles.footer}>
-        <Chat size={24} color="white" weight="thin"/>
-        <Text style={styles.number}>9.999</Text>
-        <Heart size={24} color="white" weight="thin"/>
-        <Text style={styles.number}>9.999</Text>
-      </View>
-    </View>
-   </View>
-   </View>
+    </SafeAreaView>
   );
 }

@@ -1,10 +1,13 @@
 import * as SecureStore from "expo-secure-store"
 
-async function getAuthHeader(){
-    try {
+export async function getAuthHeader(){
+    
         const token = await SecureStore.getItemAsync("token");
-
-    } catch (error) {
-        
-    }
+        const authHeader = {
+            headers: {
+                Authorization : `Bearer ${token}`
+            }
+        }
+        return authHeader;
+    
 }
