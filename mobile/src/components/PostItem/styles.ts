@@ -33,9 +33,10 @@ export const styles = StyleSheet.create({
       flex:1
    },
    image:{
-      width:200,
+      height:200,
+      width:300,
       borderRadius: 12,
-      resizeMode: 'contain'
+      resizeMode: "stretch"
    },
    post :{
       borderBottomColor:THEME.COLORS.BORDER,
@@ -59,6 +60,7 @@ export const styles = StyleSheet.create({
    contentText: {
       color:THEME.COLORS.TEXT,
       marginBottom: 12,
+      
    },
    footer: {
       flexDirection: "row",

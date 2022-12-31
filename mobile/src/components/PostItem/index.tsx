@@ -8,19 +8,11 @@ import { Context as PostContext } from "../../context/PostContext";
 import { Context as AuthContext } from "../../context/AuthContext";
 
 interface PostItemProps {
-    post: Post
+    post: Post;
+    handleLike: (postId: string) => void
 }
-export function PostItem({post}: PostItemProps) {
-    const {likePost, unlikePost} = useContext(PostContext)
+export function PostItem({post, handleLike}: PostItemProps) {
     const {profile} = useContext(AuthContext);
-
-    function handleLikePress(){
-        if(post.likes.includes(profile)){
-            unlikePost && unlikePost({postId: post._id});
-        }else{
-            likePost && likePost({postId : post._id})
-        }
-    }
 
   return (
     <View style = {styles.container}>
@@ -30,7 +22,7 @@ export function PostItem({post}: PostItemProps) {
     </View>
     <Spacer/>
     {post.image ? (
-        <Image source={{uri:"http://shorturl.at/gioT4"}} style ={styles.image}></Image>
+        <Image source={{uri:post.image}} style ={styles.image}></Image>
     ) : (
         <View style={styles.contentBody} >
             <Text style={styles.contentText}> {post.description} </Text> 
@@ -40,8 +32,8 @@ export function PostItem({post}: PostItemProps) {
       <View style={styles.footer}>
         <Chat size={24} color="white" weight="thin"/>
         <Text style={styles.number}>{post.comments.length}</Text>
-        <TouchableOpacity onPress={handleLikePress}>
-            {post.likes.includes(profile) ? (
+        <TouchableOpacity onPress={() => handleLike(post._id)}>
+            {post.likes.includes(profile as string) ? (
                  <Heart size={24} color="red" weight="fill"/>
             ) : (
                 <Heart size={24} color="white" weight="thin"/>
