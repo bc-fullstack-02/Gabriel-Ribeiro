@@ -11,6 +11,39 @@ export const styles = StyleSheet.create({
    }, 
    container:{
       flex:1,
-      paddingTop:12,
+      flexDirection: "column",
+      
    },
+   h1:{
+      fontWeight: "bold",
+      flexDirection:"column",
+      paddingLeft:0,
+      textAlign:"center",
+      marginTop:20,
+      marginBottom:10
+   },
+   li:{
+      borderBottomWidth:1,
+      borderColor:"gray",
+      marginTop: 16,
+      paddingLeft:20,
+      
+   },
+   text:{
+      fontWeight: "800",
+      marginLeft:8
+     
+   },
+   spacer: {
+      display:"flex",
+      marginBottom:10,
+      justifyContent:"flex-start",
+      flexDirection:"row"
+   },
+   unfollowButton:{
+      backgroundColor:"gray",
+      alignItems:"center",
+      borderRadius:12,
+      padding:12,
+   }
 });

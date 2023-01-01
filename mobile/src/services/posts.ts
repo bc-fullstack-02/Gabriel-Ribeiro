@@ -6,7 +6,6 @@ import * as SecureStore from "expo-secure-store"
  async function likePost(post: Post, profile : string) : Promise<Post> {
     const profileLocalStorage =  await SecureStore.getItemAsync("profile");
     const authHeader = await getAuthHeader();
-    console.log("alo", profileLocalStorage)
      await api.post(`/posts/${post._id}/like`, { userId: profileLocalStorage }, authHeader);
      return like(post,profile)
  }

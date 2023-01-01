@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     container : {
         backgroundColor:THEME.COLORS.BUTTON,
         padding:12,
-        minWidth: 240,
+        minWidth: 140,
         alignItems:"center",
         borderRadius:12,
     },
