@@ -15,7 +15,7 @@ const createPost =  async(req, res) => {
             const newPost = await Post.create(req.body).then(args => req.publish('post', followers, args))
          
             const newPostId = newPost._id;
-            const publicUrl = Minio.minioClient.protocol + '//' + Minio.minioClient.host + ':' + Minio.minioClient.port + '/' + Minio.bucketName + '/' + imageName
+            const publicUrl = Minio.bucketName + '/' + imageName
             const post = await Post.findById(newPostId).updateOne({image:publicUrl});
             
             //atualizando campo profile

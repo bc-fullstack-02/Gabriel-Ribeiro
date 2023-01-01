@@ -4,8 +4,8 @@ import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { styles } from './styles'
 import {Post} from '../../@types/post'
 import { Spacer } from '../Spacer'
-import { Context as PostContext } from "../../context/PostContext";
 import { Context as AuthContext } from "../../context/AuthContext";
+import { myIP } from '../../services/api'
 
 interface PostItemProps {
     post: Post;
@@ -22,7 +22,7 @@ export function PostItem({post, handleLike}: PostItemProps) {
     </View>
     <Spacer/>
     {post.image ? (
-        <Image source={{uri:post.image}} style ={styles.image}></Image>
+        <Image source={{uri:`http://${myIP}:9000/${post.image}`}} style ={styles.image}></Image>
     ) : (
         <View style={styles.contentBody} >
             <Text style={styles.contentText}> {post.description} </Text> 

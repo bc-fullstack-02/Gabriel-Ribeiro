@@ -47,7 +47,7 @@ export default function PostItem({post, handleLike} : PostItemProps ) {
         </Text>
     </div>  
     <div className="ml-16 flex flex-col gap-2 ">
-        <img src={post.image} alt="imagem do post" className='rounded-lg max-w-2xl max-h-2xl'/>
+        <img src={`http://localhost:9000/${post.image}`} alt="imagem do post" className='rounded-lg max-w-2xl max-h-2xl'/>
     </div>                        
     <div className="flex items-center ml-16 my-4 space-x-2">
         <Link to={`/posts/${post._id}`}>   <Chat size={24} className="text-slate-50" /></Link>
