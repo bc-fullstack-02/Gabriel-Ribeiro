@@ -1,4 +1,4 @@
-# 🦜**Parrot - MOBILE**
+# 🦜**Parrot - Mobile**
 
 ## 💻 **Sobre o projeto**
  Esse projeto faz parte do Programa Trainee SysMap de Excelência Full Stack | 2ª edição e trata-se do mobile de uma rede social feita em React-Native com Typescript
@@ -25,13 +25,14 @@
  
  ### ```npm start```
 
- ### 3. Ir para a pasta ``` mobile/src/services/```, abrir o arquivo api.ts e alterar a variável *"myIP"* com o seu ipv4 do seu computador
- <br>
-*foto*
+ ### 3. Ir para a pasta ``` mobile/src/services/```, abrir o arquivo [api.ts](https://github.com/bc-fullstack-02/Gabriel-Ribeiro/blob/main/mobile/src/services/api.ts) e alterar a variável *"myIP"* com o seu ipv4 do seu computador
+
+![tutorial](https://user-images.githubusercontent.com/80289718/210162137-eae6d342-796f-4be3-adb1-512ba3151332.jpg)
 
 ## 🎨**Design**
 
-*foto*
+![mobile](https://user-images.githubusercontent.com/80289718/210162130-dd65b215-9f44-4578-a846-a7c6607abacd.jpg)
+
 
  ### *Para acessar o Design no Figma, clique no link abaixo:*
 ### [Figma](https://www.figma.com/file/vepLgESqoFwshCzJ5lqPkn/bootcamp-2?node-id=0%3A1&t=4Xz04BTRIDXUrVZl-0)
