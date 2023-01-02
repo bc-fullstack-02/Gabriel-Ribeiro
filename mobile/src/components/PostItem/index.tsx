@@ -21,6 +21,9 @@ export function PostItem({post, handleLike}: PostItemProps) {
       <Text style ={styles.postUserText}>{post.profile}</Text>
     </View>
     <Spacer/>
+    <Text style={styles.postUserText}>{post.title}</Text>
+    {post.description && <Text style={styles.postDescriptionText}>{post.description}</Text>}
+    <Spacer/>
     {post.image ? (
         <Image source={{uri:`http://${myIP}:9000/${post.image}`}} style ={styles.image}></Image>
     ) : (
@@ -41,6 +44,7 @@ export function PostItem({post, handleLike}: PostItemProps) {
         </TouchableOpacity>
         <Text style={styles.number}>{post.likes.length}</Text>
       </View>
+      <Spacer/>
     </View>
   )
 }

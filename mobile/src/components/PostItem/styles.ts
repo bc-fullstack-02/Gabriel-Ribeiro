@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
    
    container:{
       flex:1,
-      paddingTop:12,
+      paddingTop:8,
    },
    link:{
     color: THEME.COLORS.CAPTION_400,
@@ -17,11 +17,7 @@ export const styles = StyleSheet.create({
    heading: {
       flexDirection: "row",
       alignItems: "center",
-      paddingHorizontal: 12,
-      paddingBottom: 12,
-      borderBottomColor: THEME.COLORS.BORDER, 
       fontFamily: THEME.FONT_FAMILY.BOLD,
-      borderBottomWidth: 1,
    },
    usernameText: {
       color: THEME.COLORS.TEXT,
@@ -35,6 +31,7 @@ export const styles = StyleSheet.create({
    image:{
       height:200,
       width:300,
+      marginLeft:20,
       borderRadius: 12,
       resizeMode: "stretch"
    },
@@ -54,6 +51,12 @@ export const styles = StyleSheet.create({
       fontFamily: THEME.FONT_FAMILY.BOLD,
       fontSize: THEME.FONT_SIZE.MD,
    },
+   postDescriptionText : {
+      color: THEME.COLORS.TEXT,
+      marginStart: 12,
+      fontFamily: THEME.FONT_FAMILY.REGULAR,
+      fontSize: THEME.FONT_SIZE.SM,
+   },
    contentBody: {
       paddingHorizontal : 24,
    },
@@ -66,6 +69,9 @@ export const styles = StyleSheet.create({
       flexDirection: "row",
       alignItems:"center",
       paddingHorizontal: 24,
+      borderBottomColor:THEME.COLORS.BORDER,
+      borderBottomWidth:1,
+      paddingBottom:15
    },
    number: {
       color: THEME.COLORS.TEXT,

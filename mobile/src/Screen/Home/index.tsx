@@ -49,12 +49,10 @@ export function Home({ navigation }: HomeProps) {
     const [post, ...rest] =  posts.filter(post => post._id === postId)
     try {
      if (post && !post.likes.includes(profile)){
-      console.log(profile)
        const newPost = await likePost(post, profile);
        changePostItem(newPost);
      
      }else {
-      console.log("yaaaaa");
        const newPost = await unlikePost(post, profile);
        changePostItem(newPost)
      }

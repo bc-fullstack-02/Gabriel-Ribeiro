@@ -40,7 +40,7 @@ export function AuthForm({formTitle, submitFormButtonText, submitFormButtonActio
         style={logo}
         resizeMethod="auto"
       />
-      <Heading title="Sysmap Parrot" subtitle={formTitle} />
+      <Heading title="Parrot" subtitle={formTitle} />
       <Input.Root>
         <Input.Icon>
           <User color={THEME.COLORS.CAPTION_400} />
