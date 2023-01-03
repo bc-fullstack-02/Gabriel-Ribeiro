@@ -6,7 +6,7 @@ import {
   UserCircle,
 } from "phosphor-react-native";
 import React, { useContext, useEffect, useState } from "react";
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Text, TouchableOpacity, View , RefreshControl, ScrollView} from "react-native";
 import { styles } from "./styles";
 import { Context as PostContext } from "../../context/PostContext";
 import { Context as AuthContext } from "../../context/AuthContext";
@@ -25,10 +25,13 @@ interface HomeProps {
   navigation: NativeStackNavigationProp<any, any>;
   
 }
+const wait = (timeout: number) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
 
 export function Home({ navigation }: HomeProps) {
   const { user } = useContext(AuthContext);
-  //const { getPosts, posts } = useContext(PostContext);
+  const [refreshing, setRefreshing] = React.useState(false);
   const [posts, setPosts] = useState<Post[]> ([]);
   
   useEffect(() => {
@@ -69,6 +72,15 @@ export function Home({ navigation }: HomeProps) {
   });
 }
 
+const onRefresh = React.useCallback(async () => {
+  setRefreshing(true);
+  const authHeader = await getAuthHeader();
+  const response = await api.get("/feed", authHeader);
+  setPosts(response.data.reverse())
+
+  wait(2000).then(() => setRefreshing(false));
+}, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <FocusAwareStatusBar
@@ -87,7 +99,9 @@ export function Home({ navigation }: HomeProps) {
         <FlatList
           data={posts}
           keyExtractor={({ _id }) => _id}
-          renderItem={({ item }) => <PostItem post={item}  handleLike ={handleLike} />}
+          renderItem={({ item }) => (
+            <PostItem post={item} handleLike={handleLike} />
+          )} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         />
       </View>
     </SafeAreaView>

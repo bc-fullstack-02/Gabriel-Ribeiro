@@ -1,7 +1,6 @@
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, Image } from "react-native";
 import React, { useContext, useState } from "react";
 import { Context as AuthContext } from "../../context/AuthContext";
-import { Context as PostContext } from "../../context/PostContext";
 import { Spacer } from "../../components/Spacer";
 import { Input } from "../../components/Input";
 import { THEME } from "../../Theme";
@@ -13,7 +12,6 @@ import api from "../../services/api";
 import { navigate } from "../../../RootNavigator";
 import * as ImagePicker from 'expo-image-picker';
 import * as SecureStore from "expo-secure-store";
-import { useForm } from 'react-hook-form'
 
 export function CreatePost() {
   const [title, setTitle] = useState("");
@@ -24,7 +22,6 @@ export function CreatePost() {
   const createPost = async ()=> {
     const profile =  await SecureStore.getItemAsync("profile") as string;
     const token = await SecureStore.getItemAsync("token") as string;
-   
     const dataForm = new FormData();
     
     dataForm.append("title", title);
@@ -35,6 +32,7 @@ export function CreatePost() {
       uri: image
     });
     dataForm.append("userId", profile);
+
     try {
       const authHeader = await getAuthHeader();
       const response = await api.post("/posts", dataForm, {
