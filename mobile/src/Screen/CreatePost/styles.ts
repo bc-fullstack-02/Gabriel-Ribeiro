@@ -66,6 +66,19 @@ export const styles = StyleSheet.create({
       fontSize: THEME.FONT_SIZE.SM,
       marginStart: 4,
       marginEnd:24
+   },
+   image:{
+      width: 200,
+      height: 200,
+      alignSelf:"center",
+      margin:20
+   },
+   imageButton:{
+      backgroundColor:"pink",
+      alignItems:"center",
+      borderRadius:12,
+      marginBottom:12,
+      padding:12,
    }
 
 });

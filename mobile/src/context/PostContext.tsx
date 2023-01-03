@@ -19,14 +19,14 @@ const Provider = ({children} : {children: ReactNode}) =>{
             case "like_post":
                 const newPostsLike = state.posts;
                 const [postlike , ..._] = newPostsLike.filter(
-                    (post) => post._id == action.payload.id
+                    (post: { _id: any; }) => post._id == action.payload.id
                 )
                 postlike.likes.push(action.payload.id);
                 return {...state, posts: [...newPostsLike]}
             case "unlike_post":
                 const newPostsUnlike = state.posts;
                 const [postUnlike, ...rest] = newPostsUnlike.filter(
-                    (post) => post._id == action.payload.id
+                    (post: { _id: any; }) => post._id == action.payload.id
                 )
                 const index = postUnlike.likes.indexOf(action.payload.profile)
                 postUnlike.likes.splice(index, 1);
@@ -47,7 +47,7 @@ const Provider = ({children} : {children: ReactNode}) =>{
         }
     }
 
-    const likePost = async ({postId})=>{
+    const likePost = async ({postId} : {postId: any})=>{
         try {
             const authHeader = await getAuthHeader();
             await api.post(`/posts/${postId}/like`,null , authHeader)
@@ -59,7 +59,7 @@ const Provider = ({children} : {children: ReactNode}) =>{
         }
     }
 
-    const unlikePost= async ({postId})=>{
+    const unlikePost= async ({postId} : {postId: any})=>{
         try {
             const authHeader = await getAuthHeader();
             await api.post(`/posts/${postId}/like`,null , authHeader)
@@ -70,7 +70,7 @@ const Provider = ({children} : {children: ReactNode}) =>{
         }
     }
 
-    const createPost = async ({title, description})=>{
+    const createPost = async ({title, description} : {title: any , description : any})=>{
         try {
             const authHeader = await getAuthHeader();
             const response = await api.post("/posts", {title,description}, authHeader)
