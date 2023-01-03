@@ -32,7 +32,7 @@
 
 ### **__<u>Ambiente de Front-end da Aplicação</u>__** - [STATUS: Finalizado✅]  --> [Clique Aqui](https://github.com/bc-fullstack-02/Gabriel-Ribeiro/tree/main/frontend) 
 
-### **__<u>Ambiente de Mobile da Aplicação</u>__** - [STATUS: Em andamento👷‍♀️]  --> [Clique Aqui](https://github.com/bc-fullstack-02/Gabriel-Ribeiro/tree/main/mobile) 
+### **__<u>Ambiente de Mobile da Aplicação</u>__** - [STATUS: Finalizado✅]  --> [Clique Aqui](https://github.com/bc-fullstack-02/Gabriel-Ribeiro/tree/main/mobile) 
  <br>
 
 <!--  
