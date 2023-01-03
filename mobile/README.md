@@ -18,6 +18,7 @@
  - Node.js
  - npm
  - Ambiente de [Back-end](https://github.com/bc-fullstack-02/Gabriel-Ribeiro/tree/main/backend/backend-rede-social) da Rede social configurado e rodando 
+ - Expo go instalado no celular ou algum emulador Android/iOS no PC
   
 
 ### 2. Insira os comandos abaixo no terminal
@@ -30,9 +31,9 @@
 ![tutorial](https://user-images.githubusercontent.com/80289718/210162137-eae6d342-796f-4be3-adb1-512ba3151332.jpg)
 
 ## 🎨**Design**
-
-![mobile](https://user-images.githubusercontent.com/80289718/210162130-dd65b215-9f44-4578-a846-a7c6607abacd.jpg)
-
+Login             |  Feed
+:-------------------------:|:-------------------------:
+![](https://user-images.githubusercontent.com/80289718/210162130-dd65b215-9f44-4578-a846-a7c6607abacd.jpg)  |  ![](https://user-images.githubusercontent.com/80289718/210287258-27cb817a-3606-4bc3-ba33-c6e53f4e77b8.jpg)
 
  ### *Para acessar o Design no Figma, clique no link abaixo:*
 ### [Figma](https://www.figma.com/file/vepLgESqoFwshCzJ5lqPkn/bootcamp-2?node-id=0%3A1&t=4Xz04BTRIDXUrVZl-0)
