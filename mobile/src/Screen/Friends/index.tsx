@@ -20,6 +20,7 @@ interface ProfileProps{
 
 export function Friends( ) {
   const [profiles, setProfiles] = useState<ProfileProps[]> ([]);
+  const authHeader = getAuthHeader();
 
   useEffect(()=>{
     const getProfiles = async () =>{
@@ -40,7 +41,41 @@ export function Friends( ) {
         }
     }
     getProfiles()
-  }, [])
+  }, []);
+
+  async function handleFollow(userID: string ){
+    const profileID =  await SecureStore.getItemAsync("profile") as string
+    try {
+        await api.post(`/profiles/${userID}/follow`, {id:profileID}, await authHeader);
+        changeButtonStatus(userID, true);
+    } catch (error:any) {
+        console.error(error.response.data);
+    }
+  }
+
+  async function handleUnfollow(userID: string ){
+    try {
+      const profileID =  await SecureStore.getItemAsync("profile") as string
+        await api.post(`/profiles/${userID}/follow`, {id:profileID}, await authHeader);
+        changeButtonStatus(userID, false);
+    } catch (error:any) {
+        console.error(error.response.data);
+    }
+  }
+  
+  function changeButtonStatus(userID: string, buttonDisabled: boolean ) {
+    setProfiles((profiles) => {
+        const newProfiles = profiles.map((profile) => {
+
+            if (profile._id == userID) {
+                profile.followButtonDisabled = buttonDisabled;
+            }
+            return profile;
+        });
+        return [ ...newProfiles];
+    })
+  }
+
   return (
     <SafeAreaView style={styles.container}>
        <FocusAwareStatusBar barStyle="light-content" backgroundColor={THEME.COLORS.BACKGROUND_800}/>
@@ -57,9 +92,8 @@ export function Friends( ) {
               </View>
               <Spacer/>
             <View style={styles.spacer}>
-                <Button title={"Seguir"} onPress={()=> alert(`Você seguiu o usuário ${item.username}`)}/>
-                <Spacer/>
-                <Button title={"Deixar de seguir"} style={styles.unfollowButton} onPress={()=> alert(`Você deixou de seguir o usuário ${item.username}`)}/>
+              {!item.followButtonDisabled &&  <Button title={"Seguir"} onPress={()=>handleFollow(item._id)}/>}
+              {item.followButtonDisabled && <Button title={"Deixar de seguir"} style={styles.unfollowButton} onPress={()=>handleUnfollow(item._id)}/>}
             </View>
               </View>
 
