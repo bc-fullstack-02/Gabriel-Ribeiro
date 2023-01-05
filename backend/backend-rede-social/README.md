@@ -34,6 +34,9 @@
   * Clone este projeto
   * Entre na pasta raiz de <i>"backend-rede-social"</i> e abra o arquivo <a href="https://github.com/bc-fullstack-02/Gabriel-Ribeiro/blob/main/backend/backend-rede-social/docker-compose.yaml">docker-compose.yaml</a>
   * Altere a  variável  <b>MINIO_ENDPOINT </b> inserindo o seu endereço IPV4
+  
+  ![Screenshot 2023-01-05 131239](https://user-images.githubusercontent.com/80289718/210827577-52305682-ba59-4da0-bf9b-dda08fe42a3c.jpg)
+
   * Após isso, insira no terminal o comando abaixo:
 
 ```
@@ -44,7 +47,10 @@ docker-compose up
 
 ## 🛣 Documentação SWAGGER
   Para acessar  a documentação SWAGGER e fazer os testes de requisições, use a seguinte rota :
-###  ```GET /api-docs``` 
+###  ```GET /api-docs```
+![Screenshot 2023-01-05 at 13-09-23 Swagger UI](https://user-images.githubusercontent.com/80289718/210826910-32266c6f-31f9-4526-b50c-80db6a800022.png)
+
+ 
 </br>
 
 ###  ```localhost:3000/api-docs```
