@@ -1,12 +1,9 @@
 import { Chat, Heart, Trash, UserCircle } from 'phosphor-react'
-import React, { useEffect, useState } from 'react'
 import Heading from '../Heading'
 import Text from '../Text'
 import api from '../../services/api'
-import getAuthHeader from '../../services/auth'
 import { Post } from '../../model/Post'
 import { Link } from 'react-router-dom'
-
 
 interface PostItemProps {
     post : Post
@@ -23,25 +20,21 @@ export default function PostItem({post, handleLike} : PostItemProps ) {
         await api.delete(`/posts/${post._id}`,{ data: { userId: profile }, headers: {
             Authorization: `Bearer ${token}`
         }});
-        location.reload()
+       
       }  
     }
 
   return (
     <div className="border-b border-slate-400 mt-4" key={post._id}>
-    <div className="flex flex-row items-center ml-5 my-4">
+     <div className="flex flex-row items-center ml-5 my-4">
         <UserCircle size={48} height="light" className="text-slate-50" />
         <Text className="font-extrabold ml-2">{post.profile}</Text>
-    </div>
+     </div>
     <div className="ml-16 flex flex-col gap-2">
-    <div className='flex flex-row justify-between'> <Link to={`/posts/${post._id}`}>
-          <Heading size="sm">{post.title}</Heading></Link>
-          {post.profile == user &&
-            <a onClick={ handleDeletePost}><Trash className=' text-rose-900' size={40} /></a>
-          }
-          
-    </div>
-     
+     <div className='flex flex-row justify-between'> <Link to={`/posts/${post._id}`}>
+        <Heading size="sm">{post.title}</Heading></Link>
+        {post.profile == user && <a onClick={ handleDeletePost}><Trash className=' text-rose-900' size={40} /></a> }
+     </div>
         <Text asChild >
             <p>{post.description}</p>
         </Text>

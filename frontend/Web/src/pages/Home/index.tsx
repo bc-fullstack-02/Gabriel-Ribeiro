@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Menu from '../../components/Menu'
 import Feed from '../../components/Feed'
 import api from '../../services/api';
@@ -9,8 +9,6 @@ import { likePost, unlikePost } from '../../services/posts';
 export default function Home() {
   const authHeader = getAuthHeader();
   const profile = localStorage.getItem("profile") as string;
-  
-   // JSON.parse(localStorage.getItem('user') as string);
   const [posts, setPosts] = useState<Post[]> ([]);
 
   useEffect(() => {
@@ -19,7 +17,7 @@ export default function Home() {
       setPosts(response.data.reverse())
     }
     getPosts()
-  }, []);
+  }, [posts]);
  
 
   async function handleLike(postId: String) {
@@ -36,8 +34,6 @@ export default function Home() {
      } catch (error) {
        console.error(error);
      }
-    
-   
   }
   
   function changePostItem(newPost : Post){

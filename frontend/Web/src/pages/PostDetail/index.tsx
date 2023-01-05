@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Post } from '../../model/Post';
 import api from '../../services/api';
@@ -34,17 +34,17 @@ export default function PostDetail() {
     useEffect(() => {
       async function fetchPostDetail(){
         try {
-             const response = await api.get(`/posts/${postId}`,getAuthHeader())
-             const post = response.data;
-             setPostDetail(post);
-            setComments(post.comments)
+          const response = await api.get(`/posts/${postId}`,getAuthHeader())
+          const post = response.data;
+          setPostDetail(post);
+          setComments(post.comments)
              
         } catch (error) {
             console.error(error)
         }
       }
       fetchPostDetail(); 
-    },[])
+    },[comments])
 
     async function handleLike() {
       try {
@@ -70,15 +70,15 @@ export default function PostDetail() {
       }
         console.log(data);
       try {
-      const response =  await api.post(`posts/${postId}/comments`, data, getAuthHeader());
-      const comment ={ ...response.data };
-      setComments([comment, ...comments]);
-      setPostDetail((post) =>{
+        const response =  await api.post(`posts/${postId}/comments`, data, getAuthHeader());
+        const comment ={ ...response.data };
+        setComments([comment, ...comments]);
+        setPostDetail((post) =>{
         post?.comments.push(comment);
         return post;
       })
       } catch (error) {
-        console.error(error);
+          console.error(error);
       }
     }
   
