@@ -41,7 +41,7 @@ export function Home({ navigation }: HomeProps) {
       setPosts(response.data.reverse())
     }
     getPosts()
-  }, []);
+  }, [posts]);
 
   function handlePencilClick() {
     navigation.navigate("CreatePost");
